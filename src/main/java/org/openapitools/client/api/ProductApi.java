@@ -1,6 +1,6 @@
 /*
  * Product Service
- * API for managing products
+ * Introducing our revolutionary Product Management Service! Designed to streamline your product inventory and elevate customer experiences, our cutting-edge protobuf service is a game-changer in the world of efficient product management.  With our service, you can effortlessly create new products, allowing you to quickly bring your ideas to life and expand your catalog. Retrieve product information in a snap, providing accurate and personalized details to your customers based on their specific needs and preferences.  Stay ahead of the competition by easily updating product information, ensuring your catalog is always up-to-date and optimized. Seamlessly remove products from your inventory when needed, maintaining a clean and relevant product selection.  Enhance the visual appeal of your products with our advanced media gallery functionalities. Effortlessly add and update captivating images and videos to showcase your products in the best possible light, engaging your customers and driving conversions.  Personalization is key in today's market, and our service enables you to offer unique options to your customers. Easily create and manage lists of customizable options for your products, providing flexibility and tailoring to individual preferences.  Attributes play a vital role in defining products, and our service empowers you to effectively manage them. From bulk attribute creation to listing and retrieving attribute options, our service ensures your product information is rich and comprehensive.  Our service extends its capabilities to entity management, allowing you to effortlessly handle different entities and create customized options lists associated with them. This provides further flexibility and customization options for your product offerings.  When it comes to bulk updates, our service has you covered. Effortlessly update multiple products simultaneously, saving you time and streamlining your operations.  Finding specific products and variants is a breeze with our service. Quickly locate products based on their unique stock keeping unit (SKU) values, ensuring efficient inventory management and smooth order fulfillment.  Experience a new level of efficiency and productivity with our Product Management Service. Unlock the full potential of streamlined product management and empower your business to thrive in today's competitive market. Try our service today and elevate your product management to new heights!
  *
  * The version of the OpenAPI document: v1
  * Contact: info@gemini-commerce.com
@@ -66,24 +66,30 @@ import org.openapitools.client.model.ProductAddMediaGalleryEntryResponse;
 import org.openapitools.client.model.ProductBulkAddAssetsEntriesRequest;
 import org.openapitools.client.model.ProductBulkAddAssetsEntriesResponse;
 import org.openapitools.client.model.ProductBulkDeleteProductsRequest;
+import org.openapitools.client.model.ProductBulkEnhanceProductDataWithAIRequest;
 import org.openapitools.client.model.ProductBulkRemoveAssetsEntriesRequest;
 import org.openapitools.client.model.ProductBulkUpdateAssetsEntriesRequest;
 import org.openapitools.client.model.ProductBulkUpdateAssetsEntriesResponse;
 import org.openapitools.client.model.ProductBulkUpdateRequest;
 import org.openapitools.client.model.ProductBulkUpdateRequestV2;
 import org.openapitools.client.model.ProductBulkUpdateResponse;
-import org.openapitools.client.model.ProductBulkUpdateResponseV2;
 import org.openapitools.client.model.ProductCreateProductRequest;
 import org.openapitools.client.model.ProductCreateProductRequestV2;
 import org.openapitools.client.model.ProductCreateProductResponse;
 import org.openapitools.client.model.ProductCreateProductResponseV2;
+import org.openapitools.client.model.ProductCreateProductWithAIRequest;
+import org.openapitools.client.model.ProductCreateProductWithAIResponse;
 import org.openapitools.client.model.ProductDeleteProductRequest;
 import org.openapitools.client.model.ProductDeleteRequest;
 import org.openapitools.client.model.ProductDeleteResponse;
+import org.openapitools.client.model.ProductGetEnhanceProductDataWithAIStatusRequest;
+import org.openapitools.client.model.ProductGetEnhanceProductDataWithAIStatusResponse;
 import org.openapitools.client.model.ProductGetProductByCodeRequest;
 import org.openapitools.client.model.ProductGetProductByCodeResponse;
 import org.openapitools.client.model.ProductGetProductByUrlKeyRequest;
 import org.openapitools.client.model.ProductGetProductByUrlKeyResponse;
+import org.openapitools.client.model.ProductGetProductDataInReviewRequest;
+import org.openapitools.client.model.ProductGetProductDataInReviewResponse;
 import org.openapitools.client.model.ProductGetProductRequest;
 import org.openapitools.client.model.ProductGetProductResponse;
 import org.openapitools.client.model.ProductListProductsByIdsRequest;
@@ -95,10 +101,13 @@ import org.openapitools.client.model.ProductListProductsResponse;
 import org.openapitools.client.model.ProductListVariantsBySkuRequest;
 import org.openapitools.client.model.ProductListVariantsBySkuResponse;
 import org.openapitools.client.model.ProductRemoveMediaGalleryEntryRequest;
+import org.openapitools.client.model.ProductUpdateDataToBeReviewedRequest;
 import org.openapitools.client.model.ProductUpdateMediaGalleryEntryRequest;
 import org.openapitools.client.model.ProductUpdateProductRequest;
 import org.openapitools.client.model.ProductUpdateProductRequestV2;
 import org.openapitools.client.model.ProductUpdateProductResponse;
+import org.openapitools.client.model.ProductUpdateProductWithAIRequest;
+import org.openapitools.client.model.ProductUpdateProductWithAIResponse;
 import org.openapitools.client.model.RpcStatus;
 
 import java.lang.reflect.Type;
@@ -145,7 +154,7 @@ public class ProductApi {
     }
 
     /**
-     * Build call for productAddMediaGalleryEntry
+     * Build call for addMediaGalleryEntry
      * @param body  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -153,11 +162,13 @@ public class ProductApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call productAddMediaGalleryEntryCall(ProductAddMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call addMediaGalleryEntryCall(ProductAddMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -198,61 +209,65 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call productAddMediaGalleryEntryValidateBeforeCall(ProductAddMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call addMediaGalleryEntryValidateBeforeCall(ProductAddMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productAddMediaGalleryEntry(Async)");
+            throw new ApiException("Missing the required parameter 'body' when calling addMediaGalleryEntry(Async)");
         }
 
-        return productAddMediaGalleryEntryCall(body, _callback);
+        return addMediaGalleryEntryCall(body, _callback);
 
     }
 
     /**
-     * 
-     * 
+     * Add Media Gallery Entry
+     * The AddMediaGalleryEntry endpoint allows users to add a new media entry to the gallery of a specific product. To make a request to this endpoint, users need to provide the necessary information in the specified format. The request includes the tenant_id to specify the relevant tenant, the product_id to identify the target product, and the asset_grn which represents the globally unique identifier for the media asset being added. Additionally, the position field indicates the desired position of the media entry within the gallery, allowing users to control the order in which the media items are displayed. The metadata field, which is a repeated field, provides the option to include additional metadata associated with the media entry. This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @return ProductAddMediaGalleryEntryResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public ProductAddMediaGalleryEntryResponse productAddMediaGalleryEntry(ProductAddMediaGalleryEntryRequest body) throws ApiException {
-        ApiResponse<ProductAddMediaGalleryEntryResponse> localVarResp = productAddMediaGalleryEntryWithHttpInfo(body);
+    public ProductAddMediaGalleryEntryResponse addMediaGalleryEntry(ProductAddMediaGalleryEntryRequest body) throws ApiException {
+        ApiResponse<ProductAddMediaGalleryEntryResponse> localVarResp = addMediaGalleryEntryWithHttpInfo(body);
         return localVarResp.getData();
     }
 
     /**
-     * 
-     * 
+     * Add Media Gallery Entry
+     * The AddMediaGalleryEntry endpoint allows users to add a new media entry to the gallery of a specific product. To make a request to this endpoint, users need to provide the necessary information in the specified format. The request includes the tenant_id to specify the relevant tenant, the product_id to identify the target product, and the asset_grn which represents the globally unique identifier for the media asset being added. Additionally, the position field indicates the desired position of the media entry within the gallery, allowing users to control the order in which the media items are displayed. The metadata field, which is a repeated field, provides the option to include additional metadata associated with the media entry. This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @return ApiResponse&lt;ProductAddMediaGalleryEntryResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ProductAddMediaGalleryEntryResponse> productAddMediaGalleryEntryWithHttpInfo(ProductAddMediaGalleryEntryRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productAddMediaGalleryEntryValidateBeforeCall(body, null);
+    public ApiResponse<ProductAddMediaGalleryEntryResponse> addMediaGalleryEntryWithHttpInfo(ProductAddMediaGalleryEntryRequest body) throws ApiException {
+        okhttp3.Call localVarCall = addMediaGalleryEntryValidateBeforeCall(body, null);
         Type localVarReturnType = new TypeToken<ProductAddMediaGalleryEntryResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
-     * 
+     * Add Media Gallery Entry (asynchronously)
+     * The AddMediaGalleryEntry endpoint allows users to add a new media entry to the gallery of a specific product. To make a request to this endpoint, users need to provide the necessary information in the specified format. The request includes the tenant_id to specify the relevant tenant, the product_id to identify the target product, and the asset_grn which represents the globally unique identifier for the media asset being added. Additionally, the position field indicates the desired position of the media entry within the gallery, allowing users to control the order in which the media items are displayed. The metadata field, which is a repeated field, provides the option to include additional metadata associated with the media entry. This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -260,19 +275,21 @@ public class ProductApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call productAddMediaGalleryEntryAsync(ProductAddMediaGalleryEntryRequest body, final ApiCallback<ProductAddMediaGalleryEntryResponse> _callback) throws ApiException {
+    public okhttp3.Call addMediaGalleryEntryAsync(ProductAddMediaGalleryEntryRequest body, final ApiCallback<ProductAddMediaGalleryEntryResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = productAddMediaGalleryEntryValidateBeforeCall(body, _callback);
+        okhttp3.Call localVarCall = addMediaGalleryEntryValidateBeforeCall(body, _callback);
         Type localVarReturnType = new TypeToken<ProductAddMediaGalleryEntryResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for productBulkAddAssetsEntries
+     * Build call for bulkAddAssetsEntries
      * @param body  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -280,11 +297,13 @@ public class ProductApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call productBulkAddAssetsEntriesCall(ProductBulkAddAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call bulkAddAssetsEntriesCall(ProductBulkAddAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -325,60 +344,2490 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call productBulkAddAssetsEntriesValidateBeforeCall(ProductBulkAddAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call bulkAddAssetsEntriesValidateBeforeCall(ProductBulkAddAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'body' is set
         if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productBulkAddAssetsEntries(Async)");
+            throw new ApiException("Missing the required parameter 'body' when calling bulkAddAssetsEntries(Async)");
         }
 
-        return productBulkAddAssetsEntriesCall(body, _callback);
+        return bulkAddAssetsEntriesCall(body, _callback);
 
     }
 
     /**
-     * Assets endpoints
-     * 
+     * Bulk Add Assets Entries
+     * The BulkAddAssetsEntries endpoint allows users to add assets. This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @return ProductBulkAddAssetsEntriesResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public ProductBulkAddAssetsEntriesResponse productBulkAddAssetsEntries(ProductBulkAddAssetsEntriesRequest body) throws ApiException {
-        ApiResponse<ProductBulkAddAssetsEntriesResponse> localVarResp = productBulkAddAssetsEntriesWithHttpInfo(body);
+    public ProductBulkAddAssetsEntriesResponse bulkAddAssetsEntries(ProductBulkAddAssetsEntriesRequest body) throws ApiException {
+        ApiResponse<ProductBulkAddAssetsEntriesResponse> localVarResp = bulkAddAssetsEntriesWithHttpInfo(body);
         return localVarResp.getData();
     }
 
     /**
-     * Assets endpoints
-     * 
+     * Bulk Add Assets Entries
+     * The BulkAddAssetsEntries endpoint allows users to add assets. This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @return ApiResponse&lt;ProductBulkAddAssetsEntriesResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<ProductBulkAddAssetsEntriesResponse> productBulkAddAssetsEntriesWithHttpInfo(ProductBulkAddAssetsEntriesRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productBulkAddAssetsEntriesValidateBeforeCall(body, null);
+    public ApiResponse<ProductBulkAddAssetsEntriesResponse> bulkAddAssetsEntriesWithHttpInfo(ProductBulkAddAssetsEntriesRequest body) throws ApiException {
+        okhttp3.Call localVarCall = bulkAddAssetsEntriesValidateBeforeCall(body, null);
         Type localVarReturnType = new TypeToken<ProductBulkAddAssetsEntriesResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Assets endpoints (asynchronously)
+     * Bulk Add Assets Entries (asynchronously)
+     * The BulkAddAssetsEntries endpoint allows users to add assets. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkAddAssetsEntriesAsync(ProductBulkAddAssetsEntriesRequest body, final ApiCallback<ProductBulkAddAssetsEntriesResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = bulkAddAssetsEntriesValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductBulkAddAssetsEntriesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for bulkDeleteProducts
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkDeleteProductsCall(ProductBulkDeleteProductsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/BulkDeleteProducts";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call bulkDeleteProductsValidateBeforeCall(ProductBulkDeleteProductsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling bulkDeleteProducts(Async)");
+        }
+
+        return bulkDeleteProductsCall(body, _callback);
+
+    }
+
+    /**
+     * Bulk Delete Products
+     * This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object bulkDeleteProducts(ProductBulkDeleteProductsRequest body) throws ApiException {
+        ApiResponse<Object> localVarResp = bulkDeleteProductsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Bulk Delete Products
+     * This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> bulkDeleteProductsWithHttpInfo(ProductBulkDeleteProductsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = bulkDeleteProductsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Bulk Delete Products (asynchronously)
+     * This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkDeleteProductsAsync(ProductBulkDeleteProductsRequest body, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = bulkDeleteProductsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for bulkEnhanceProductDataWithAI
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkEnhanceProductDataWithAICall(ProductBulkEnhanceProductDataWithAIRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/BulkEnhanceProductDataWithAI";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call bulkEnhanceProductDataWithAIValidateBeforeCall(ProductBulkEnhanceProductDataWithAIRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling bulkEnhanceProductDataWithAI(Async)");
+        }
+
+        return bulkEnhanceProductDataWithAICall(body, _callback);
+
+    }
+
+    /**
+     * Bulk Enhance Product Data With AI
+     * The BulkEnhanceProductDataWithAI endpoint allows users to enhance product data using artificial intelligence (AI) capabilities. By making a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enrich and optimize product information. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object bulkEnhanceProductDataWithAI(ProductBulkEnhanceProductDataWithAIRequest body) throws ApiException {
+        ApiResponse<Object> localVarResp = bulkEnhanceProductDataWithAIWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Bulk Enhance Product Data With AI
+     * The BulkEnhanceProductDataWithAI endpoint allows users to enhance product data using artificial intelligence (AI) capabilities. By making a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enrich and optimize product information. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> bulkEnhanceProductDataWithAIWithHttpInfo(ProductBulkEnhanceProductDataWithAIRequest body) throws ApiException {
+        okhttp3.Call localVarCall = bulkEnhanceProductDataWithAIValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Bulk Enhance Product Data With AI (asynchronously)
+     * The BulkEnhanceProductDataWithAI endpoint allows users to enhance product data using artificial intelligence (AI) capabilities. By making a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enrich and optimize product information. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkEnhanceProductDataWithAIAsync(ProductBulkEnhanceProductDataWithAIRequest body, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = bulkEnhanceProductDataWithAIValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for bulkRemoveAssetsEntries
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkRemoveAssetsEntriesCall(ProductBulkRemoveAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/BulkRemoveAssetsEntries";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call bulkRemoveAssetsEntriesValidateBeforeCall(ProductBulkRemoveAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling bulkRemoveAssetsEntries(Async)");
+        }
+
+        return bulkRemoveAssetsEntriesCall(body, _callback);
+
+    }
+
+    /**
+     * Bulk Remove Assets Entries
+     * The BulkRemoveAssetsEntries endpoint allows users to remove assets. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object bulkRemoveAssetsEntries(ProductBulkRemoveAssetsEntriesRequest body) throws ApiException {
+        ApiResponse<Object> localVarResp = bulkRemoveAssetsEntriesWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Bulk Remove Assets Entries
+     * The BulkRemoveAssetsEntries endpoint allows users to remove assets. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> bulkRemoveAssetsEntriesWithHttpInfo(ProductBulkRemoveAssetsEntriesRequest body) throws ApiException {
+        okhttp3.Call localVarCall = bulkRemoveAssetsEntriesValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Bulk Remove Assets Entries (asynchronously)
+     * The BulkRemoveAssetsEntries endpoint allows users to remove assets. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkRemoveAssetsEntriesAsync(ProductBulkRemoveAssetsEntriesRequest body, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = bulkRemoveAssetsEntriesValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for bulkUpdateAssetsEntries
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkUpdateAssetsEntriesCall(ProductBulkUpdateAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/BulkUpdateAssetsEntries";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call bulkUpdateAssetsEntriesValidateBeforeCall(ProductBulkUpdateAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling bulkUpdateAssetsEntries(Async)");
+        }
+
+        return bulkUpdateAssetsEntriesCall(body, _callback);
+
+    }
+
+    /**
+     * Bulk Update Assets Entries
+     * The BulkUpdateAssetsEntries endpoint allows users to update assets. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ProductBulkUpdateAssetsEntriesResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductBulkUpdateAssetsEntriesResponse bulkUpdateAssetsEntries(ProductBulkUpdateAssetsEntriesRequest body) throws ApiException {
+        ApiResponse<ProductBulkUpdateAssetsEntriesResponse> localVarResp = bulkUpdateAssetsEntriesWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Bulk Update Assets Entries
+     * The BulkUpdateAssetsEntries endpoint allows users to update assets. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductBulkUpdateAssetsEntriesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductBulkUpdateAssetsEntriesResponse> bulkUpdateAssetsEntriesWithHttpInfo(ProductBulkUpdateAssetsEntriesRequest body) throws ApiException {
+        okhttp3.Call localVarCall = bulkUpdateAssetsEntriesValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductBulkUpdateAssetsEntriesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Bulk Update Assets Entries (asynchronously)
+     * The BulkUpdateAssetsEntries endpoint allows users to update assets. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkUpdateAssetsEntriesAsync(ProductBulkUpdateAssetsEntriesRequest body, final ApiCallback<ProductBulkUpdateAssetsEntriesResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = bulkUpdateAssetsEntriesValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductBulkUpdateAssetsEntriesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for bulkUpdateV2
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkUpdateV2Call(ProductBulkUpdateRequestV2 body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/BulkUpdateV2";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call bulkUpdateV2ValidateBeforeCall(ProductBulkUpdateRequestV2 body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling bulkUpdateV2(Async)");
+        }
+
+        return bulkUpdateV2Call(body, _callback);
+
+    }
+
+    /**
+     * Bulk Update Products
+     * Version 2 of bulk updates for product attributes with enhanced payload structure and response format. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ProductBulkUpdateResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductBulkUpdateResponse bulkUpdateV2(ProductBulkUpdateRequestV2 body) throws ApiException {
+        ApiResponse<ProductBulkUpdateResponse> localVarResp = bulkUpdateV2WithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Bulk Update Products
+     * Version 2 of bulk updates for product attributes with enhanced payload structure and response format. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductBulkUpdateResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductBulkUpdateResponse> bulkUpdateV2WithHttpInfo(ProductBulkUpdateRequestV2 body) throws ApiException {
+        okhttp3.Call localVarCall = bulkUpdateV2ValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductBulkUpdateResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Bulk Update Products (asynchronously)
+     * Version 2 of bulk updates for product attributes with enhanced payload structure and response format. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call bulkUpdateV2Async(ProductBulkUpdateRequestV2 body, final ApiCallback<ProductBulkUpdateResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = bulkUpdateV2ValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductBulkUpdateResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createAttributeOptions
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAttributeOptionsCall(EntitymanagerCreateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/CreateAttributeOptions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createAttributeOptionsValidateBeforeCall(EntitymanagerCreateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling createAttributeOptions(Async)");
+        }
+
+        return createAttributeOptionsCall(body, _callback);
+
+    }
+
+    /**
+     * Create Attribute Options
+     * Create attribute options with specified codes, values, and swatches. Returns created options and any associated errors.
+     * @param body  (required)
+     * @return EntitymanagerCreateAttributeOptionsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerCreateAttributeOptionsResponse createAttributeOptions(EntitymanagerCreateAttributeOptionsRequest body) throws ApiException {
+        ApiResponse<EntitymanagerCreateAttributeOptionsResponse> localVarResp = createAttributeOptionsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create Attribute Options
+     * Create attribute options with specified codes, values, and swatches. Returns created options and any associated errors.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerCreateAttributeOptionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerCreateAttributeOptionsResponse> createAttributeOptionsWithHttpInfo(EntitymanagerCreateAttributeOptionsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = createAttributeOptionsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerCreateAttributeOptionsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create Attribute Options (asynchronously)
+     * Create attribute options with specified codes, values, and swatches. Returns created options and any associated errors.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createAttributeOptionsAsync(EntitymanagerCreateAttributeOptionsRequest body, final ApiCallback<EntitymanagerCreateAttributeOptionsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createAttributeOptionsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerCreateAttributeOptionsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createEntity
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createEntityCall(EntitymanagerEntity body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/CreateEntity";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createEntityValidateBeforeCall(EntitymanagerEntity body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling createEntity(Async)");
+        }
+
+        return createEntityCall(body, _callback);
+
+    }
+
+    /**
+     * Create Entity
+     * The CreateEntity endpoint allows users to define and create a new entity with custom attributes, providing a flexible way to represent and manage different data structures within the system. By making a request to this endpoint, users can create a new entity that serves as an abstraction of a product or any other domain-specific object. This endpoint empowers users to define the specific attributes that compose the entity, such as color, composition, technical details, or any other relevant properties. Utilize the CreateEntity endpoint to dynamically extend and adapt your system&#39;s data model to accommodate diverse business requirements and efficiently manage various types of entities.
+     * @param body  (required)
+     * @return EntitymanagerCreateEntityResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerCreateEntityResponse createEntity(EntitymanagerEntity body) throws ApiException {
+        ApiResponse<EntitymanagerCreateEntityResponse> localVarResp = createEntityWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create Entity
+     * The CreateEntity endpoint allows users to define and create a new entity with custom attributes, providing a flexible way to represent and manage different data structures within the system. By making a request to this endpoint, users can create a new entity that serves as an abstraction of a product or any other domain-specific object. This endpoint empowers users to define the specific attributes that compose the entity, such as color, composition, technical details, or any other relevant properties. Utilize the CreateEntity endpoint to dynamically extend and adapt your system&#39;s data model to accommodate diverse business requirements and efficiently manage various types of entities.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerCreateEntityResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerCreateEntityResponse> createEntityWithHttpInfo(EntitymanagerEntity body) throws ApiException {
+        okhttp3.Call localVarCall = createEntityValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerCreateEntityResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create Entity (asynchronously)
+     * The CreateEntity endpoint allows users to define and create a new entity with custom attributes, providing a flexible way to represent and manage different data structures within the system. By making a request to this endpoint, users can create a new entity that serves as an abstraction of a product or any other domain-specific object. This endpoint empowers users to define the specific attributes that compose the entity, such as color, composition, technical details, or any other relevant properties. Utilize the CreateEntity endpoint to dynamically extend and adapt your system&#39;s data model to accommodate diverse business requirements and efficiently manage various types of entities.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createEntityAsync(EntitymanagerEntity body, final ApiCallback<EntitymanagerCreateEntityResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createEntityValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerCreateEntityResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createOptionsList
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createOptionsListCall(EntitymanagerCreateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/CreateOptionsList";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createOptionsListValidateBeforeCall(EntitymanagerCreateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling createOptionsList(Async)");
+        }
+
+        return createOptionsListCall(body, _callback);
+
+    }
+
+    /**
+     * Create Options List
+     * The CreateOptionsList endpoint allows users to create an OptionList, which represents a list of predefined options for assigning to an attribute. By making a request to this endpoint with the provided request format, users can create a new OptionList by specifying the relevant tenant ID and providing the OptionList object containing the predefined options. This functionality facilitates efficient management and assignment of predefined attribute values, ensuring consistency and flexibility within the system.
+     * @param body  (required)
+     * @return EntitymanagerCreateOptionsListResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerCreateOptionsListResponse createOptionsList(EntitymanagerCreateOptionsListRequest body) throws ApiException {
+        ApiResponse<EntitymanagerCreateOptionsListResponse> localVarResp = createOptionsListWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create Options List
+     * The CreateOptionsList endpoint allows users to create an OptionList, which represents a list of predefined options for assigning to an attribute. By making a request to this endpoint with the provided request format, users can create a new OptionList by specifying the relevant tenant ID and providing the OptionList object containing the predefined options. This functionality facilitates efficient management and assignment of predefined attribute values, ensuring consistency and flexibility within the system.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerCreateOptionsListResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerCreateOptionsListResponse> createOptionsListWithHttpInfo(EntitymanagerCreateOptionsListRequest body) throws ApiException {
+        okhttp3.Call localVarCall = createOptionsListValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerCreateOptionsListResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create Options List (asynchronously)
+     * The CreateOptionsList endpoint allows users to create an OptionList, which represents a list of predefined options for assigning to an attribute. By making a request to this endpoint with the provided request format, users can create a new OptionList by specifying the relevant tenant ID and providing the OptionList object containing the predefined options. This functionality facilitates efficient management and assignment of predefined attribute values, ensuring consistency and flexibility within the system.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createOptionsListAsync(EntitymanagerCreateOptionsListRequest body, final ApiCallback<EntitymanagerCreateOptionsListResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createOptionsListValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerCreateOptionsListResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for createProductWithAI
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createProductWithAICall(ProductCreateProductWithAIRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/CreateProductWithAI";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call createProductWithAIValidateBeforeCall(ProductCreateProductWithAIRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling createProductWithAI(Async)");
+        }
+
+        return createProductWithAICall(body, _callback);
+
+    }
+
+    /**
+     * Create Product With AI
+     * The CreateProductWithAI endpoint allows users to create a new product within the system using artificial intelligence (AI) capabilities. By sending a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enhance and optimize the product creation process.
+     * @param body  (required)
+     * @return ProductCreateProductWithAIResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductCreateProductWithAIResponse createProductWithAI(ProductCreateProductWithAIRequest body) throws ApiException {
+        ApiResponse<ProductCreateProductWithAIResponse> localVarResp = createProductWithAIWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create Product With AI
+     * The CreateProductWithAI endpoint allows users to create a new product within the system using artificial intelligence (AI) capabilities. By sending a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enhance and optimize the product creation process.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductCreateProductWithAIResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductCreateProductWithAIResponse> createProductWithAIWithHttpInfo(ProductCreateProductWithAIRequest body) throws ApiException {
+        okhttp3.Call localVarCall = createProductWithAIValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductCreateProductWithAIResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create Product With AI (asynchronously)
+     * The CreateProductWithAI endpoint allows users to create a new product within the system using artificial intelligence (AI) capabilities. By sending a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enhance and optimize the product creation process.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call createProductWithAIAsync(ProductCreateProductWithAIRequest body, final ApiCallback<ProductCreateProductWithAIResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = createProductWithAIValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductCreateProductWithAIResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getAttributeOption
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAttributeOptionCall(EntitymanagerGetAttributeOptionRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetAttributeOption";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAttributeOptionValidateBeforeCall(EntitymanagerGetAttributeOptionRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getAttributeOption(Async)");
+        }
+
+        return getAttributeOptionCall(body, _callback);
+
+    }
+
+    /**
+     * Get Attribute Option
+     * Retrieve attribute option details by providing the tenant ID, list code, and option ID. Returns the specified attribute option.
+     * @param body  (required)
+     * @return EntitymanagerGetAttributeOptionResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerGetAttributeOptionResponse getAttributeOption(EntitymanagerGetAttributeOptionRequest body) throws ApiException {
+        ApiResponse<EntitymanagerGetAttributeOptionResponse> localVarResp = getAttributeOptionWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Attribute Option
+     * Retrieve attribute option details by providing the tenant ID, list code, and option ID. Returns the specified attribute option.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerGetAttributeOptionResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerGetAttributeOptionResponse> getAttributeOptionWithHttpInfo(EntitymanagerGetAttributeOptionRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getAttributeOptionValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Attribute Option (asynchronously)
+     * Retrieve attribute option details by providing the tenant ID, list code, and option ID. Returns the specified attribute option.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAttributeOptionAsync(EntitymanagerGetAttributeOptionRequest body, final ApiCallback<EntitymanagerGetAttributeOptionResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAttributeOptionValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getAttributeOptions
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAttributeOptionsCall(EntitymanagerGetAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetAttributeOptions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAttributeOptionsValidateBeforeCall(EntitymanagerGetAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getAttributeOptions(Async)");
+        }
+
+        return getAttributeOptionsCall(body, _callback);
+
+    }
+
+    /**
+     * Get Attribute Options
+     * Retrieve a list of attribute options based on the provided tenant ID and list code.
+     * @param body  (required)
+     * @return EntitymanagerGetAttributeOptionsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerGetAttributeOptionsResponse getAttributeOptions(EntitymanagerGetAttributeOptionsRequest body) throws ApiException {
+        ApiResponse<EntitymanagerGetAttributeOptionsResponse> localVarResp = getAttributeOptionsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Attribute Options
+     * Retrieve a list of attribute options based on the provided tenant ID and list code.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerGetAttributeOptionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerGetAttributeOptionsResponse> getAttributeOptionsWithHttpInfo(EntitymanagerGetAttributeOptionsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getAttributeOptionsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Attribute Options (asynchronously)
+     * Retrieve a list of attribute options based on the provided tenant ID and list code.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getAttributeOptionsAsync(EntitymanagerGetAttributeOptionsRequest body, final ApiCallback<EntitymanagerGetAttributeOptionsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAttributeOptionsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getEntity
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getEntityCall(EntitymanagerEntityRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetEntity";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getEntityValidateBeforeCall(EntitymanagerEntityRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getEntity(Async)");
+        }
+
+        return getEntityCall(body, _callback);
+
+    }
+
+    /**
+     * Get Entity Details
+     * Retrieve details of an entity by providing the tenant ID and either entity data or entity ID. Returns information including ID, type, code, label, relationships, and attributes.
+     * @param body  (required)
+     * @return EntitymanagerEntity
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerEntity getEntity(EntitymanagerEntityRequest body) throws ApiException {
+        ApiResponse<EntitymanagerEntity> localVarResp = getEntityWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Entity Details
+     * Retrieve details of an entity by providing the tenant ID and either entity data or entity ID. Returns information including ID, type, code, label, relationships, and attributes.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerEntity&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerEntity> getEntityWithHttpInfo(EntitymanagerEntityRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getEntityValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerEntity>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Entity Details (asynchronously)
+     * Retrieve details of an entity by providing the tenant ID and either entity data or entity ID. Returns information including ID, type, code, label, relationships, and attributes.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getEntityAsync(EntitymanagerEntityRequest body, final ApiCallback<EntitymanagerEntity> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getEntityValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerEntity>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getOptionsList
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getOptionsListCall(EntitymanagerGetOptionsListRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetOptionsList";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getOptionsListValidateBeforeCall(EntitymanagerGetOptionsListRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getOptionsList(Async)");
+        }
+
+        return getOptionsListCall(body, _callback);
+
+    }
+
+    /**
+     * Get Options List
+     * Retrieve option lists.
+     * @param body  (required)
+     * @return EntitymanagerGetOptionsListResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerGetOptionsListResponse getOptionsList(EntitymanagerGetOptionsListRequest body) throws ApiException {
+        ApiResponse<EntitymanagerGetOptionsListResponse> localVarResp = getOptionsListWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Options List
+     * Retrieve option lists.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerGetOptionsListResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerGetOptionsListResponse> getOptionsListWithHttpInfo(EntitymanagerGetOptionsListRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getOptionsListValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerGetOptionsListResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Options List (asynchronously)
+     * Retrieve option lists.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getOptionsListAsync(EntitymanagerGetOptionsListRequest body, final ApiCallback<EntitymanagerGetOptionsListResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getOptionsListValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerGetOptionsListResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getProduct
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductCall(ProductGetProductRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetProduct";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getProductValidateBeforeCall(ProductGetProductRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getProduct(Async)");
+        }
+
+        return getProductCall(body, _callback);
+
+    }
+
+    /**
+     * Get Product
+     * The GetProduct endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique identifier.
+     * @param body  (required)
+     * @return ProductGetProductResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductGetProductResponse getProduct(ProductGetProductRequest body) throws ApiException {
+        ApiResponse<ProductGetProductResponse> localVarResp = getProductWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Product
+     * The GetProduct endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique identifier.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductGetProductResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductGetProductResponse> getProductWithHttpInfo(ProductGetProductRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getProductValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductGetProductResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Product (asynchronously)
+     * The GetProduct endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique identifier.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductAsync(ProductGetProductRequest body, final ApiCallback<ProductGetProductResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getProductValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductGetProductResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getProductByCode
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductByCodeCall(ProductGetProductByCodeRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetProductByCode";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getProductByCodeValidateBeforeCall(ProductGetProductByCodeRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getProductByCode(Async)");
+        }
+
+        return getProductByCodeCall(body, _callback);
+
+    }
+
+    /**
+     * Get Product By Code
+     * The GetProductByCode endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique code.
+     * @param body  (required)
+     * @return ProductGetProductByCodeResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductGetProductByCodeResponse getProductByCode(ProductGetProductByCodeRequest body) throws ApiException {
+        ApiResponse<ProductGetProductByCodeResponse> localVarResp = getProductByCodeWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Product By Code
+     * The GetProductByCode endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique code.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductGetProductByCodeResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductGetProductByCodeResponse> getProductByCodeWithHttpInfo(ProductGetProductByCodeRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getProductByCodeValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductGetProductByCodeResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Product By Code (asynchronously)
+     * The GetProductByCode endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique code.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductByCodeAsync(ProductGetProductByCodeRequest body, final ApiCallback<ProductGetProductByCodeResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getProductByCodeValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductGetProductByCodeResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getProductByUrlKey
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductByUrlKeyCall(ProductGetProductByUrlKeyRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetProductByUrlKey";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getProductByUrlKeyValidateBeforeCall(ProductGetProductByUrlKeyRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getProductByUrlKey(Async)");
+        }
+
+        return getProductByUrlKeyCall(body, _callback);
+
+    }
+
+    /**
+     * Get Product By Url Key
+     * The GetProductByUrlKey endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique url key.
+     * @param body  (required)
+     * @return ProductGetProductByUrlKeyResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductGetProductByUrlKeyResponse getProductByUrlKey(ProductGetProductByUrlKeyRequest body) throws ApiException {
+        ApiResponse<ProductGetProductByUrlKeyResponse> localVarResp = getProductByUrlKeyWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Product By Url Key
+     * The GetProductByUrlKey endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique url key.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductGetProductByUrlKeyResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductGetProductByUrlKeyResponse> getProductByUrlKeyWithHttpInfo(ProductGetProductByUrlKeyRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getProductByUrlKeyValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductGetProductByUrlKeyResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Product By Url Key (asynchronously)
+     * The GetProductByUrlKey endpoint enables users to retrieve a product from the system. By sending a request to this endpoint, users can retrieve a product by providing its unique url key.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductByUrlKeyAsync(ProductGetProductByUrlKeyRequest body, final ApiCallback<ProductGetProductByUrlKeyResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getProductByUrlKeyValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductGetProductByUrlKeyResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for getProductDataInReview
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductDataInReviewCall(ProductGetProductDataInReviewRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetProductDataInReview";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getProductDataInReviewValidateBeforeCall(ProductGetProductDataInReviewRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling getProductDataInReview(Async)");
+        }
+
+        return getProductDataInReviewCall(body, _callback);
+
+    }
+
+    /**
+     * Get Product Data In Review
+     * The GetProductDataInReview endpoint allows users to retrieve product data that is currently under review. By making a request to this endpoint, users can access detailed information about the product data that is pending approval or review by authorized personnel. This functionality provides transparency and visibility into the product data review process, enabling users to track the status and progress of product data submissions.
+     * @param body  (required)
+     * @return ProductGetProductDataInReviewResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductGetProductDataInReviewResponse getProductDataInReview(ProductGetProductDataInReviewRequest body) throws ApiException {
+        ApiResponse<ProductGetProductDataInReviewResponse> localVarResp = getProductDataInReviewWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Product Data In Review
+     * The GetProductDataInReview endpoint allows users to retrieve product data that is currently under review. By making a request to this endpoint, users can access detailed information about the product data that is pending approval or review by authorized personnel. This functionality provides transparency and visibility into the product data review process, enabling users to track the status and progress of product data submissions.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductGetProductDataInReviewResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductGetProductDataInReviewResponse> getProductDataInReviewWithHttpInfo(ProductGetProductDataInReviewRequest body) throws ApiException {
+        okhttp3.Call localVarCall = getProductDataInReviewValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductGetProductDataInReviewResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Product Data In Review (asynchronously)
+     * The GetProductDataInReview endpoint allows users to retrieve product data that is currently under review. By making a request to this endpoint, users can access detailed information about the product data that is pending approval or review by authorized personnel. This functionality provides transparency and visibility into the product data review process, enabling users to track the status and progress of product data submissions.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call getProductDataInReviewAsync(ProductGetProductDataInReviewRequest body, final ApiCallback<ProductGetProductDataInReviewResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getProductDataInReviewValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductGetProductDataInReviewResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listAttributeOptions
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listAttributeOptionsCall(EntitymanagerListAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/ListAttributeOptions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAttributeOptionsValidateBeforeCall(EntitymanagerListAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling listAttributeOptions(Async)");
+        }
+
+        return listAttributeOptionsCall(body, _callback);
+
+    }
+
+    /**
+     * List Attribute Options
+     * 
+     * @param body  (required)
+     * @return EntitymanagerListAttributeOptionsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerListAttributeOptionsResponse listAttributeOptions(EntitymanagerListAttributeOptionsRequest body) throws ApiException {
+        ApiResponse<EntitymanagerListAttributeOptionsResponse> localVarResp = listAttributeOptionsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List Attribute Options
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerListAttributeOptionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerListAttributeOptionsResponse> listAttributeOptionsWithHttpInfo(EntitymanagerListAttributeOptionsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = listAttributeOptionsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerListAttributeOptionsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List Attribute Options (asynchronously)
      * 
      * @param body  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -387,14 +2836,826 @@ public class ProductApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call productBulkAddAssetsEntriesAsync(ProductBulkAddAssetsEntriesRequest body, final ApiCallback<ProductBulkAddAssetsEntriesResponse> _callback) throws ApiException {
+    public okhttp3.Call listAttributeOptionsAsync(EntitymanagerListAttributeOptionsRequest body, final ApiCallback<EntitymanagerListAttributeOptionsResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = productBulkAddAssetsEntriesValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductBulkAddAssetsEntriesResponse>(){}.getType();
+        okhttp3.Call localVarCall = listAttributeOptionsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerListAttributeOptionsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listEntities
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listEntitiesCall(EntitymanagerListEntitiesRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/ListEntities";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listEntitiesValidateBeforeCall(EntitymanagerListEntitiesRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling listEntities(Async)");
+        }
+
+        return listEntitiesCall(body, _callback);
+
+    }
+
+    /**
+     * List Entities
+     * 
+     * @param body  (required)
+     * @return EntitymanagerListEntitiesResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerListEntitiesResponse listEntities(EntitymanagerListEntitiesRequest body) throws ApiException {
+        ApiResponse<EntitymanagerListEntitiesResponse> localVarResp = listEntitiesWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List Entities
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerListEntitiesResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerListEntitiesResponse> listEntitiesWithHttpInfo(EntitymanagerListEntitiesRequest body) throws ApiException {
+        okhttp3.Call localVarCall = listEntitiesValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerListEntitiesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List Entities (asynchronously)
+     * 
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listEntitiesAsync(EntitymanagerListEntitiesRequest body, final ApiCallback<EntitymanagerListEntitiesResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listEntitiesValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerListEntitiesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listOptionsLists
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listOptionsListsCall(EntitymanagerListOptionsListsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/ListOptionsLists";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listOptionsListsValidateBeforeCall(EntitymanagerListOptionsListsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling listOptionsLists(Async)");
+        }
+
+        return listOptionsListsCall(body, _callback);
+
+    }
+
+    /**
+     * List Options Lists
+     * The ListOptionsLists endpoint allows users to retrieve a list of OptionLists available in the system. By making a request to this endpoint with the provided request format, users can obtain all the OptionLists associated with the specified tenant. This functionality enables users to access and manage the predefined options available for various attributes within the system. Utilizing the ListOptionsLists endpoint provides a convenient way to retrieve and work with OptionLists, facilitating efficient management of attribute options and ensuring consistency in attribute values throughout the system.
+     * @param body  (required)
+     * @return EntitymanagerListOptionsListsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerListOptionsListsResponse listOptionsLists(EntitymanagerListOptionsListsRequest body) throws ApiException {
+        ApiResponse<EntitymanagerListOptionsListsResponse> localVarResp = listOptionsListsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List Options Lists
+     * The ListOptionsLists endpoint allows users to retrieve a list of OptionLists available in the system. By making a request to this endpoint with the provided request format, users can obtain all the OptionLists associated with the specified tenant. This functionality enables users to access and manage the predefined options available for various attributes within the system. Utilizing the ListOptionsLists endpoint provides a convenient way to retrieve and work with OptionLists, facilitating efficient management of attribute options and ensuring consistency in attribute values throughout the system.
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerListOptionsListsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerListOptionsListsResponse> listOptionsListsWithHttpInfo(EntitymanagerListOptionsListsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = listOptionsListsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerListOptionsListsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List Options Lists (asynchronously)
+     * The ListOptionsLists endpoint allows users to retrieve a list of OptionLists available in the system. By making a request to this endpoint with the provided request format, users can obtain all the OptionLists associated with the specified tenant. This functionality enables users to access and manage the predefined options available for various attributes within the system. Utilizing the ListOptionsLists endpoint provides a convenient way to retrieve and work with OptionLists, facilitating efficient management of attribute options and ensuring consistency in attribute values throughout the system.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listOptionsListsAsync(EntitymanagerListOptionsListsRequest body, final ApiCallback<EntitymanagerListOptionsListsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listOptionsListsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerListOptionsListsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listProducts
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listProductsCall(ProductListProductsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/ListProducts";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listProductsValidateBeforeCall(ProductListProductsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling listProducts(Async)");
+        }
+
+        return listProductsCall(body, _callback);
+
+    }
+
+    /**
+     * List Products
+     * The ListProducts endpoint provides users with the ability to retrieve a filtered list of products based on specific criteria. By including filter parameters in the request, users can customize the response to only include products that meet certain conditions, such as price range, category, availability, or any other relevant attributes. This endpoint empowers users to efficiently narrow down the product selection and retrieve tailored results.
+     * @param body  (required)
+     * @return ProductListProductsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductListProductsResponse listProducts(ProductListProductsRequest body) throws ApiException {
+        ApiResponse<ProductListProductsResponse> localVarResp = listProductsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List Products
+     * The ListProducts endpoint provides users with the ability to retrieve a filtered list of products based on specific criteria. By including filter parameters in the request, users can customize the response to only include products that meet certain conditions, such as price range, category, availability, or any other relevant attributes. This endpoint empowers users to efficiently narrow down the product selection and retrieve tailored results.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductListProductsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductListProductsResponse> listProductsWithHttpInfo(ProductListProductsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = listProductsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductListProductsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List Products (asynchronously)
+     * The ListProducts endpoint provides users with the ability to retrieve a filtered list of products based on specific criteria. By including filter parameters in the request, users can customize the response to only include products that meet certain conditions, such as price range, category, availability, or any other relevant attributes. This endpoint empowers users to efficiently narrow down the product selection and retrieve tailored results.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listProductsAsync(ProductListProductsRequest body, final ApiCallback<ProductListProductsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listProductsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductListProductsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listProductsByIds
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listProductsByIdsCall(ProductListProductsByIdsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/ListProductsByIds";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listProductsByIdsValidateBeforeCall(ProductListProductsByIdsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling listProductsByIds(Async)");
+        }
+
+        return listProductsByIdsCall(body, _callback);
+
+    }
+
+    /**
+     * List Products By Ids
+     * The ListProductsByIds endpoint allows users to retrieve a list of products based on provided IDs. By making a request to this endpoint and specifying a set of product IDs, users can retrieve detailed information about the corresponding products. This endpoint facilitates efficient retrieval of specific products, enabling applications to display accurate and targeted product information to users.
+     * @param body  (required)
+     * @return ProductListProductsByIdsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductListProductsByIdsResponse listProductsByIds(ProductListProductsByIdsRequest body) throws ApiException {
+        ApiResponse<ProductListProductsByIdsResponse> localVarResp = listProductsByIdsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List Products By Ids
+     * The ListProductsByIds endpoint allows users to retrieve a list of products based on provided IDs. By making a request to this endpoint and specifying a set of product IDs, users can retrieve detailed information about the corresponding products. This endpoint facilitates efficient retrieval of specific products, enabling applications to display accurate and targeted product information to users.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductListProductsByIdsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductListProductsByIdsResponse> listProductsByIdsWithHttpInfo(ProductListProductsByIdsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = listProductsByIdsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductListProductsByIdsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List Products By Ids (asynchronously)
+     * The ListProductsByIds endpoint allows users to retrieve a list of products based on provided IDs. By making a request to this endpoint and specifying a set of product IDs, users can retrieve detailed information about the corresponding products. This endpoint facilitates efficient retrieval of specific products, enabling applications to display accurate and targeted product information to users.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listProductsByIdsAsync(ProductListProductsByIdsRequest body, final ApiCallback<ProductListProductsByIdsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listProductsByIdsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductListProductsByIdsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listProductsBySku
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listProductsBySkuCall(ProductListProductsBySkuRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/ListProductsBySku";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listProductsBySkuValidateBeforeCall(ProductListProductsBySkuRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling listProductsBySku(Async)");
+        }
+
+        return listProductsBySkuCall(body, _callback);
+
+    }
+
+    /**
+     * List Products By Sku
+     * 
+     * @param body  (required)
+     * @return ProductListProductsBySkuResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductListProductsBySkuResponse listProductsBySku(ProductListProductsBySkuRequest body) throws ApiException {
+        ApiResponse<ProductListProductsBySkuResponse> localVarResp = listProductsBySkuWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List Products By Sku
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductListProductsBySkuResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductListProductsBySkuResponse> listProductsBySkuWithHttpInfo(ProductListProductsBySkuRequest body) throws ApiException {
+        okhttp3.Call localVarCall = listProductsBySkuValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductListProductsBySkuResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List Products By Sku (asynchronously)
+     * 
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listProductsBySkuAsync(ProductListProductsBySkuRequest body, final ApiCallback<ProductListProductsBySkuResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listProductsBySkuValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductListProductsBySkuResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for listVariantsBySku
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listVariantsBySkuCall(ProductListVariantsBySkuRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/ListVariantsBySku";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listVariantsBySkuValidateBeforeCall(ProductListVariantsBySkuRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling listVariantsBySku(Async)");
+        }
+
+        return listVariantsBySkuCall(body, _callback);
+
+    }
+
+    /**
+     * List Product Variants By Sku
+     * 
+     * @param body  (required)
+     * @return ProductListVariantsBySkuResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductListVariantsBySkuResponse listVariantsBySku(ProductListVariantsBySkuRequest body) throws ApiException {
+        ApiResponse<ProductListVariantsBySkuResponse> localVarResp = listVariantsBySkuWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * List Product Variants By Sku
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductListVariantsBySkuResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductListVariantsBySkuResponse> listVariantsBySkuWithHttpInfo(ProductListVariantsBySkuRequest body) throws ApiException {
+        okhttp3.Call localVarCall = listVariantsBySkuValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductListVariantsBySkuResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * List Product Variants By Sku (asynchronously)
+     * 
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call listVariantsBySkuAsync(ProductListVariantsBySkuRequest body, final ApiCallback<ProductListVariantsBySkuResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listVariantsBySkuValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductListVariantsBySkuResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -452,7 +3713,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -469,7 +3730,7 @@ public class ProductApi {
 
     /**
      * 
-     * 
+     * Allow creation of multiple attributes. If any attribute is invalid, an error will be returned with more details, and in the response body, the attributes created will be returned.
      * @param body  (required)
      * @return EntitymanagerBulkCreateAttributeResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -487,7 +3748,7 @@ public class ProductApi {
 
     /**
      * 
-     * 
+     * Allow creation of multiple attributes. If any attribute is invalid, an error will be returned with more details, and in the response body, the attributes created will be returned.
      * @param body  (required)
      * @return ApiResponse&lt;EntitymanagerBulkCreateAttributeResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -506,7 +3767,7 @@ public class ProductApi {
 
     /**
      *  (asynchronously)
-     * 
+     * Allow creation of multiple attributes. If any attribute is invalid, an error will be returned with more details, and in the response body, the attributes created will be returned.
      * @param body  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -522,260 +3783,6 @@ public class ProductApi {
 
         okhttp3.Call localVarCall = productBulkCreateAttributeValidateBeforeCall(body, _callback);
         Type localVarReturnType = new TypeToken<EntitymanagerBulkCreateAttributeResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productBulkDeleteProducts
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkDeleteProductsCall(ProductBulkDeleteProductsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/BulkDeleteProducts";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productBulkDeleteProductsValidateBeforeCall(ProductBulkDeleteProductsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productBulkDeleteProducts(Async)");
-        }
-
-        return productBulkDeleteProductsCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return Object
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public Object productBulkDeleteProducts(ProductBulkDeleteProductsRequest body) throws ApiException {
-        ApiResponse<Object> localVarResp = productBulkDeleteProductsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;Object&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Object> productBulkDeleteProductsWithHttpInfo(ProductBulkDeleteProductsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productBulkDeleteProductsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkDeleteProductsAsync(ProductBulkDeleteProductsRequest body, final ApiCallback<Object> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productBulkDeleteProductsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productBulkRemoveAssetsEntries
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkRemoveAssetsEntriesCall(ProductBulkRemoveAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/BulkRemoveAssetsEntries";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productBulkRemoveAssetsEntriesValidateBeforeCall(ProductBulkRemoveAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productBulkRemoveAssetsEntries(Async)");
-        }
-
-        return productBulkRemoveAssetsEntriesCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return Object
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public Object productBulkRemoveAssetsEntries(ProductBulkRemoveAssetsEntriesRequest body) throws ApiException {
-        ApiResponse<Object> localVarResp = productBulkRemoveAssetsEntriesWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;Object&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Object> productBulkRemoveAssetsEntriesWithHttpInfo(ProductBulkRemoveAssetsEntriesRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productBulkRemoveAssetsEntriesValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkRemoveAssetsEntriesAsync(ProductBulkRemoveAssetsEntriesRequest body, final ApiCallback<Object> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productBulkRemoveAssetsEntriesValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -835,7 +3842,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -853,7 +3860,7 @@ public class ProductApi {
 
     /**
      * 
-     * 
+     * This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @return ProductBulkUpdateResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -873,7 +3880,7 @@ public class ProductApi {
 
     /**
      * 
-     * 
+     * This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @return ApiResponse&lt;ProductBulkUpdateResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -894,7 +3901,7 @@ public class ProductApi {
 
     /**
      *  (asynchronously)
-     * 
+     * This operation is asynchronous and may complete after the response.
      * @param body  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -912,260 +3919,6 @@ public class ProductApi {
 
         okhttp3.Call localVarCall = productBulkUpdateValidateBeforeCall(body, _callback);
         Type localVarReturnType = new TypeToken<ProductBulkUpdateResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productBulkUpdateAssetsEntries
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkUpdateAssetsEntriesCall(ProductBulkUpdateAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/BulkUpdateAssetsEntries";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productBulkUpdateAssetsEntriesValidateBeforeCall(ProductBulkUpdateAssetsEntriesRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productBulkUpdateAssetsEntries(Async)");
-        }
-
-        return productBulkUpdateAssetsEntriesCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductBulkUpdateAssetsEntriesResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductBulkUpdateAssetsEntriesResponse productBulkUpdateAssetsEntries(ProductBulkUpdateAssetsEntriesRequest body) throws ApiException {
-        ApiResponse<ProductBulkUpdateAssetsEntriesResponse> localVarResp = productBulkUpdateAssetsEntriesWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductBulkUpdateAssetsEntriesResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductBulkUpdateAssetsEntriesResponse> productBulkUpdateAssetsEntriesWithHttpInfo(ProductBulkUpdateAssetsEntriesRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productBulkUpdateAssetsEntriesValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductBulkUpdateAssetsEntriesResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkUpdateAssetsEntriesAsync(ProductBulkUpdateAssetsEntriesRequest body, final ApiCallback<ProductBulkUpdateAssetsEntriesResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productBulkUpdateAssetsEntriesValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductBulkUpdateAssetsEntriesResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productBulkUpdateV2
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkUpdateV2Call(ProductBulkUpdateRequestV2 body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/BulkUpdateV2";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productBulkUpdateV2ValidateBeforeCall(ProductBulkUpdateRequestV2 body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productBulkUpdateV2(Async)");
-        }
-
-        return productBulkUpdateV2Call(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductBulkUpdateResponseV2
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductBulkUpdateResponseV2 productBulkUpdateV2(ProductBulkUpdateRequestV2 body) throws ApiException {
-        ApiResponse<ProductBulkUpdateResponseV2> localVarResp = productBulkUpdateV2WithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductBulkUpdateResponseV2&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductBulkUpdateResponseV2> productBulkUpdateV2WithHttpInfo(ProductBulkUpdateRequestV2 body) throws ApiException {
-        okhttp3.Call localVarCall = productBulkUpdateV2ValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductBulkUpdateResponseV2>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productBulkUpdateV2Async(ProductBulkUpdateRequestV2 body, final ApiCallback<ProductBulkUpdateResponseV2> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productBulkUpdateV2ValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductBulkUpdateResponseV2>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1223,7 +3976,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -1297,389 +4050,8 @@ public class ProductApi {
         return localVarCall;
     }
     /**
-     * Build call for productCreateAttributeOptions
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productCreateAttributeOptionsCall(EntitymanagerCreateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/CreateAttributeOptions";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productCreateAttributeOptionsValidateBeforeCall(EntitymanagerCreateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productCreateAttributeOptions(Async)");
-        }
-
-        return productCreateAttributeOptionsCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerCreateAttributeOptionsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerCreateAttributeOptionsResponse productCreateAttributeOptions(EntitymanagerCreateAttributeOptionsRequest body) throws ApiException {
-        ApiResponse<EntitymanagerCreateAttributeOptionsResponse> localVarResp = productCreateAttributeOptionsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerCreateAttributeOptionsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerCreateAttributeOptionsResponse> productCreateAttributeOptionsWithHttpInfo(EntitymanagerCreateAttributeOptionsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productCreateAttributeOptionsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerCreateAttributeOptionsResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productCreateAttributeOptionsAsync(EntitymanagerCreateAttributeOptionsRequest body, final ApiCallback<EntitymanagerCreateAttributeOptionsResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productCreateAttributeOptionsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerCreateAttributeOptionsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productCreateEntity
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productCreateEntityCall(EntitymanagerEntity body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/CreateEntity";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productCreateEntityValidateBeforeCall(EntitymanagerEntity body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productCreateEntity(Async)");
-        }
-
-        return productCreateEntityCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerCreateEntityResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerCreateEntityResponse productCreateEntity(EntitymanagerEntity body) throws ApiException {
-        ApiResponse<EntitymanagerCreateEntityResponse> localVarResp = productCreateEntityWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerCreateEntityResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerCreateEntityResponse> productCreateEntityWithHttpInfo(EntitymanagerEntity body) throws ApiException {
-        okhttp3.Call localVarCall = productCreateEntityValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerCreateEntityResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productCreateEntityAsync(EntitymanagerEntity body, final ApiCallback<EntitymanagerCreateEntityResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productCreateEntityValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerCreateEntityResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productCreateOptionsList
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productCreateOptionsListCall(EntitymanagerCreateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/CreateOptionsList";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productCreateOptionsListValidateBeforeCall(EntitymanagerCreateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productCreateOptionsList(Async)");
-        }
-
-        return productCreateOptionsListCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerCreateOptionsListResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerCreateOptionsListResponse productCreateOptionsList(EntitymanagerCreateOptionsListRequest body) throws ApiException {
-        ApiResponse<EntitymanagerCreateOptionsListResponse> localVarResp = productCreateOptionsListWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerCreateOptionsListResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerCreateOptionsListResponse> productCreateOptionsListWithHttpInfo(EntitymanagerCreateOptionsListRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productCreateOptionsListValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerCreateOptionsListResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productCreateOptionsListAsync(EntitymanagerCreateOptionsListRequest body, final ApiCallback<EntitymanagerCreateOptionsListResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productCreateOptionsListValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerCreateOptionsListResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for productCreateProduct
-     * @param body  (required)
+     * @param body The CreateProductRequest message is used to create a new product within the system. It contains various fields that allow specifying the details and attributes of the product. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -1733,7 +4105,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -1752,7 +4124,7 @@ public class ProductApi {
     /**
      * 
      * 
-     * @param body  (required)
+     * @param body The CreateProductRequest message is used to create a new product within the system. It contains various fields that allow specifying the details and attributes of the product. (required)
      * @return ProductCreateProductResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1772,7 +4144,7 @@ public class ProductApi {
     /**
      * 
      * 
-     * @param body  (required)
+     * @param body The CreateProductRequest message is used to create a new product within the system. It contains various fields that allow specifying the details and attributes of the product. (required)
      * @return ApiResponse&lt;ProductCreateProductResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -1793,7 +4165,7 @@ public class ProductApi {
     /**
      *  (asynchronously)
      * 
-     * @param body  (required)
+     * @param body The CreateProductRequest message is used to create a new product within the system. It contains various fields that allow specifying the details and attributes of the product. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1867,7 +4239,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -1996,7 +4368,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -2130,7 +4502,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -2257,7 +4629,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -2384,7 +4756,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -2458,895 +4830,6 @@ public class ProductApi {
         return localVarCall;
     }
     /**
-     * Build call for productGetAttributeOption
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetAttributeOptionCall(EntitymanagerGetAttributeOptionRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/GetAttributeOption";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productGetAttributeOptionValidateBeforeCall(EntitymanagerGetAttributeOptionRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productGetAttributeOption(Async)");
-        }
-
-        return productGetAttributeOptionCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerGetAttributeOptionResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerGetAttributeOptionResponse productGetAttributeOption(EntitymanagerGetAttributeOptionRequest body) throws ApiException {
-        ApiResponse<EntitymanagerGetAttributeOptionResponse> localVarResp = productGetAttributeOptionWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerGetAttributeOptionResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerGetAttributeOptionResponse> productGetAttributeOptionWithHttpInfo(EntitymanagerGetAttributeOptionRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productGetAttributeOptionValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetAttributeOptionAsync(EntitymanagerGetAttributeOptionRequest body, final ApiCallback<EntitymanagerGetAttributeOptionResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productGetAttributeOptionValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productGetAttributeOptions
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetAttributeOptionsCall(EntitymanagerGetAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/GetAttributeOptions";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productGetAttributeOptionsValidateBeforeCall(EntitymanagerGetAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productGetAttributeOptions(Async)");
-        }
-
-        return productGetAttributeOptionsCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerGetAttributeOptionsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerGetAttributeOptionsResponse productGetAttributeOptions(EntitymanagerGetAttributeOptionsRequest body) throws ApiException {
-        ApiResponse<EntitymanagerGetAttributeOptionsResponse> localVarResp = productGetAttributeOptionsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerGetAttributeOptionsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerGetAttributeOptionsResponse> productGetAttributeOptionsWithHttpInfo(EntitymanagerGetAttributeOptionsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productGetAttributeOptionsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionsResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetAttributeOptionsAsync(EntitymanagerGetAttributeOptionsRequest body, final ApiCallback<EntitymanagerGetAttributeOptionsResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productGetAttributeOptionsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerGetAttributeOptionsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productGetEntity
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetEntityCall(EntitymanagerEntityRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/GetEntity";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productGetEntityValidateBeforeCall(EntitymanagerEntityRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productGetEntity(Async)");
-        }
-
-        return productGetEntityCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerEntity
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerEntity productGetEntity(EntitymanagerEntityRequest body) throws ApiException {
-        ApiResponse<EntitymanagerEntity> localVarResp = productGetEntityWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerEntity&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerEntity> productGetEntityWithHttpInfo(EntitymanagerEntityRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productGetEntityValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerEntity>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetEntityAsync(EntitymanagerEntityRequest body, final ApiCallback<EntitymanagerEntity> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productGetEntityValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerEntity>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productGetOptionsList
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetOptionsListCall(EntitymanagerGetOptionsListRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/GetOptionsList";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productGetOptionsListValidateBeforeCall(EntitymanagerGetOptionsListRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productGetOptionsList(Async)");
-        }
-
-        return productGetOptionsListCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerGetOptionsListResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerGetOptionsListResponse productGetOptionsList(EntitymanagerGetOptionsListRequest body) throws ApiException {
-        ApiResponse<EntitymanagerGetOptionsListResponse> localVarResp = productGetOptionsListWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerGetOptionsListResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerGetOptionsListResponse> productGetOptionsListWithHttpInfo(EntitymanagerGetOptionsListRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productGetOptionsListValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerGetOptionsListResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetOptionsListAsync(EntitymanagerGetOptionsListRequest body, final ApiCallback<EntitymanagerGetOptionsListResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productGetOptionsListValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerGetOptionsListResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productGetProduct
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetProductCall(ProductGetProductRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/GetProduct";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productGetProductValidateBeforeCall(ProductGetProductRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productGetProduct(Async)");
-        }
-
-        return productGetProductCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductGetProductResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductGetProductResponse productGetProduct(ProductGetProductRequest body) throws ApiException {
-        ApiResponse<ProductGetProductResponse> localVarResp = productGetProductWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductGetProductResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductGetProductResponse> productGetProductWithHttpInfo(ProductGetProductRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productGetProductValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductGetProductResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetProductAsync(ProductGetProductRequest body, final ApiCallback<ProductGetProductResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productGetProductValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductGetProductResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productGetProductByCode
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetProductByCodeCall(ProductGetProductByCodeRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/GetProductByCode";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productGetProductByCodeValidateBeforeCall(ProductGetProductByCodeRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productGetProductByCode(Async)");
-        }
-
-        return productGetProductByCodeCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductGetProductByCodeResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductGetProductByCodeResponse productGetProductByCode(ProductGetProductByCodeRequest body) throws ApiException {
-        ApiResponse<ProductGetProductByCodeResponse> localVarResp = productGetProductByCodeWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductGetProductByCodeResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductGetProductByCodeResponse> productGetProductByCodeWithHttpInfo(ProductGetProductByCodeRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productGetProductByCodeValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductGetProductByCodeResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetProductByCodeAsync(ProductGetProductByCodeRequest body, final ApiCallback<ProductGetProductByCodeResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productGetProductByCodeValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductGetProductByCodeResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productGetProductByUrlKey
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetProductByUrlKeyCall(ProductGetProductByUrlKeyRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/GetProductByUrlKey";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productGetProductByUrlKeyValidateBeforeCall(ProductGetProductByUrlKeyRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productGetProductByUrlKey(Async)");
-        }
-
-        return productGetProductByUrlKeyCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductGetProductByUrlKeyResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductGetProductByUrlKeyResponse productGetProductByUrlKey(ProductGetProductByUrlKeyRequest body) throws ApiException {
-        ApiResponse<ProductGetProductByUrlKeyResponse> localVarResp = productGetProductByUrlKeyWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductGetProductByUrlKeyResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductGetProductByUrlKeyResponse> productGetProductByUrlKeyWithHttpInfo(ProductGetProductByUrlKeyRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productGetProductByUrlKeyValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductGetProductByUrlKeyResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productGetProductByUrlKeyAsync(ProductGetProductByUrlKeyRequest body, final ApiCallback<ProductGetProductByUrlKeyResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productGetProductByUrlKeyValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductGetProductByUrlKeyResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for productListAttributeGroups
      * @param body  (required)
      * @param _callback Callback for upload/download progress
@@ -3400,7 +4883,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -3416,7 +4899,7 @@ public class ProductApi {
     }
 
     /**
-     * Attribute Groups endpoints
+     * 
      * 
      * @param body  (required)
      * @return EntitymanagerListAttributeGroupsResponse
@@ -3434,7 +4917,7 @@ public class ProductApi {
     }
 
     /**
-     * Attribute Groups endpoints
+     * 
      * 
      * @param body  (required)
      * @return ApiResponse&lt;EntitymanagerListAttributeGroupsResponse&gt;
@@ -3453,7 +4936,7 @@ public class ProductApi {
     }
 
     /**
-     * Attribute Groups endpoints (asynchronously)
+     *  (asynchronously)
      * 
      * @param body  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -3470,1022 +4953,6 @@ public class ProductApi {
 
         okhttp3.Call localVarCall = productListAttributeGroupsValidateBeforeCall(body, _callback);
         Type localVarReturnType = new TypeToken<EntitymanagerListAttributeGroupsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productListAttributeOptions
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListAttributeOptionsCall(EntitymanagerListAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/ListAttributeOptions";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productListAttributeOptionsValidateBeforeCall(EntitymanagerListAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productListAttributeOptions(Async)");
-        }
-
-        return productListAttributeOptionsCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerListAttributeOptionsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerListAttributeOptionsResponse productListAttributeOptions(EntitymanagerListAttributeOptionsRequest body) throws ApiException {
-        ApiResponse<EntitymanagerListAttributeOptionsResponse> localVarResp = productListAttributeOptionsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerListAttributeOptionsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerListAttributeOptionsResponse> productListAttributeOptionsWithHttpInfo(EntitymanagerListAttributeOptionsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productListAttributeOptionsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerListAttributeOptionsResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListAttributeOptionsAsync(EntitymanagerListAttributeOptionsRequest body, final ApiCallback<EntitymanagerListAttributeOptionsResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productListAttributeOptionsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerListAttributeOptionsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productListEntities
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListEntitiesCall(EntitymanagerListEntitiesRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/ListEntities";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productListEntitiesValidateBeforeCall(EntitymanagerListEntitiesRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productListEntities(Async)");
-        }
-
-        return productListEntitiesCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerListEntitiesResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerListEntitiesResponse productListEntities(EntitymanagerListEntitiesRequest body) throws ApiException {
-        ApiResponse<EntitymanagerListEntitiesResponse> localVarResp = productListEntitiesWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerListEntitiesResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerListEntitiesResponse> productListEntitiesWithHttpInfo(EntitymanagerListEntitiesRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productListEntitiesValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerListEntitiesResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListEntitiesAsync(EntitymanagerListEntitiesRequest body, final ApiCallback<EntitymanagerListEntitiesResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productListEntitiesValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerListEntitiesResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productListOptionsLists
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListOptionsListsCall(EntitymanagerListOptionsListsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/ListOptionsLists";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productListOptionsListsValidateBeforeCall(EntitymanagerListOptionsListsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productListOptionsLists(Async)");
-        }
-
-        return productListOptionsListsCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerListOptionsListsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerListOptionsListsResponse productListOptionsLists(EntitymanagerListOptionsListsRequest body) throws ApiException {
-        ApiResponse<EntitymanagerListOptionsListsResponse> localVarResp = productListOptionsListsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerListOptionsListsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerListOptionsListsResponse> productListOptionsListsWithHttpInfo(EntitymanagerListOptionsListsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productListOptionsListsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerListOptionsListsResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListOptionsListsAsync(EntitymanagerListOptionsListsRequest body, final ApiCallback<EntitymanagerListOptionsListsResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productListOptionsListsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerListOptionsListsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productListProducts
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListProductsCall(ProductListProductsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/ListProducts";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productListProductsValidateBeforeCall(ProductListProductsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productListProducts(Async)");
-        }
-
-        return productListProductsCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductListProductsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductListProductsResponse productListProducts(ProductListProductsRequest body) throws ApiException {
-        ApiResponse<ProductListProductsResponse> localVarResp = productListProductsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductListProductsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductListProductsResponse> productListProductsWithHttpInfo(ProductListProductsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productListProductsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductListProductsResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListProductsAsync(ProductListProductsRequest body, final ApiCallback<ProductListProductsResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productListProductsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductListProductsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productListProductsByIds
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListProductsByIdsCall(ProductListProductsByIdsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/ListProductsByIds";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productListProductsByIdsValidateBeforeCall(ProductListProductsByIdsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productListProductsByIds(Async)");
-        }
-
-        return productListProductsByIdsCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductListProductsByIdsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductListProductsByIdsResponse productListProductsByIds(ProductListProductsByIdsRequest body) throws ApiException {
-        ApiResponse<ProductListProductsByIdsResponse> localVarResp = productListProductsByIdsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductListProductsByIdsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductListProductsByIdsResponse> productListProductsByIdsWithHttpInfo(ProductListProductsByIdsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productListProductsByIdsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductListProductsByIdsResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListProductsByIdsAsync(ProductListProductsByIdsRequest body, final ApiCallback<ProductListProductsByIdsResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productListProductsByIdsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductListProductsByIdsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productListProductsBySku
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListProductsBySkuCall(ProductListProductsBySkuRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/ListProductsBySku";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productListProductsBySkuValidateBeforeCall(ProductListProductsBySkuRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productListProductsBySku(Async)");
-        }
-
-        return productListProductsBySkuCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductListProductsBySkuResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductListProductsBySkuResponse productListProductsBySku(ProductListProductsBySkuRequest body) throws ApiException {
-        ApiResponse<ProductListProductsBySkuResponse> localVarResp = productListProductsBySkuWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductListProductsBySkuResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductListProductsBySkuResponse> productListProductsBySkuWithHttpInfo(ProductListProductsBySkuRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productListProductsBySkuValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductListProductsBySkuResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListProductsBySkuAsync(ProductListProductsBySkuRequest body, final ApiCallback<ProductListProductsBySkuResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productListProductsBySkuValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductListProductsBySkuResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productListVariantsBySku
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListVariantsBySkuCall(ProductListVariantsBySkuRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/ListVariantsBySku";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productListVariantsBySkuValidateBeforeCall(ProductListVariantsBySkuRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productListVariantsBySku(Async)");
-        }
-
-        return productListVariantsBySkuCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ProductListVariantsBySkuResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ProductListVariantsBySkuResponse productListVariantsBySku(ProductListVariantsBySkuRequest body) throws ApiException {
-        ApiResponse<ProductListVariantsBySkuResponse> localVarResp = productListVariantsBySkuWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;ProductListVariantsBySkuResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<ProductListVariantsBySkuResponse> productListVariantsBySkuWithHttpInfo(ProductListVariantsBySkuRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productListVariantsBySkuValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<ProductListVariantsBySkuResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productListVariantsBySkuAsync(ProductListVariantsBySkuRequest body, final ApiCallback<ProductListVariantsBySkuResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productListVariantsBySkuValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<ProductListVariantsBySkuResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productRemoveMediaGalleryEntry
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productRemoveMediaGalleryEntryCall(ProductRemoveMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/RemoveMediaGalleryEntry";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productRemoveMediaGalleryEntryValidateBeforeCall(ProductRemoveMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productRemoveMediaGalleryEntry(Async)");
-        }
-
-        return productRemoveMediaGalleryEntryCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return Object
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public Object productRemoveMediaGalleryEntry(ProductRemoveMediaGalleryEntryRequest body) throws ApiException {
-        ApiResponse<Object> localVarResp = productRemoveMediaGalleryEntryWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;Object&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Object> productRemoveMediaGalleryEntryWithHttpInfo(ProductRemoveMediaGalleryEntryRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productRemoveMediaGalleryEntryValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productRemoveMediaGalleryEntryAsync(ProductRemoveMediaGalleryEntryRequest body, final ApiCallback<Object> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productRemoveMediaGalleryEntryValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -4543,7 +5010,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -4670,7 +5137,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -4744,387 +5211,6 @@ public class ProductApi {
         return localVarCall;
     }
     /**
-     * Build call for productUpdateAttributeOptions
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productUpdateAttributeOptionsCall(EntitymanagerUpdateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/UpdateAttributeOptions";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productUpdateAttributeOptionsValidateBeforeCall(EntitymanagerUpdateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productUpdateAttributeOptions(Async)");
-        }
-
-        return productUpdateAttributeOptionsCall(body, _callback);
-
-    }
-
-    /**
-     * rpc GetAttributeOptionByCode (product.entitymanager.GetAttributeOptionByCodeRequest) returns (product.entitymanager.GetAttributeOptionByCodeResponse) {}
-     * 
-     * @param body  (required)
-     * @return EntitymanagerUpdateAttributeOptionsResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerUpdateAttributeOptionsResponse productUpdateAttributeOptions(EntitymanagerUpdateAttributeOptionsRequest body) throws ApiException {
-        ApiResponse<EntitymanagerUpdateAttributeOptionsResponse> localVarResp = productUpdateAttributeOptionsWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * rpc GetAttributeOptionByCode (product.entitymanager.GetAttributeOptionByCodeRequest) returns (product.entitymanager.GetAttributeOptionByCodeResponse) {}
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerUpdateAttributeOptionsResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerUpdateAttributeOptionsResponse> productUpdateAttributeOptionsWithHttpInfo(EntitymanagerUpdateAttributeOptionsRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productUpdateAttributeOptionsValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerUpdateAttributeOptionsResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     * rpc GetAttributeOptionByCode (product.entitymanager.GetAttributeOptionByCodeRequest) returns (product.entitymanager.GetAttributeOptionByCodeResponse) {} (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productUpdateAttributeOptionsAsync(EntitymanagerUpdateAttributeOptionsRequest body, final ApiCallback<EntitymanagerUpdateAttributeOptionsResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productUpdateAttributeOptionsValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerUpdateAttributeOptionsResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productUpdateMediaGalleryEntry
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productUpdateMediaGalleryEntryCall(ProductUpdateMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/UpdateMediaGalleryEntry";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productUpdateMediaGalleryEntryValidateBeforeCall(ProductUpdateMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productUpdateMediaGalleryEntry(Async)");
-        }
-
-        return productUpdateMediaGalleryEntryCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return Object
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public Object productUpdateMediaGalleryEntry(ProductUpdateMediaGalleryEntryRequest body) throws ApiException {
-        ApiResponse<Object> localVarResp = productUpdateMediaGalleryEntryWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;Object&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Object> productUpdateMediaGalleryEntryWithHttpInfo(ProductUpdateMediaGalleryEntryRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productUpdateMediaGalleryEntryValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productUpdateMediaGalleryEntryAsync(ProductUpdateMediaGalleryEntryRequest body, final ApiCallback<Object> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productUpdateMediaGalleryEntryValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<Object>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for productUpdateOptionsList
-     * @param body  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productUpdateOptionsListCall(EntitymanagerUpdateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = body;
-
-        // create path and map variables
-        String localVarPath = "/product.Product/UpdateOptionsList";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call productUpdateOptionsListValidateBeforeCall(EntitymanagerUpdateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'body' is set
-        if (body == null) {
-            throw new ApiException("Missing the required parameter 'body' when calling productUpdateOptionsList(Async)");
-        }
-
-        return productUpdateOptionsListCall(body, _callback);
-
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return EntitymanagerUpdateOptionsListResponse
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public EntitymanagerUpdateOptionsListResponse productUpdateOptionsList(EntitymanagerUpdateOptionsListRequest body) throws ApiException {
-        ApiResponse<EntitymanagerUpdateOptionsListResponse> localVarResp = productUpdateOptionsListWithHttpInfo(body);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @param body  (required)
-     * @return ApiResponse&lt;EntitymanagerUpdateOptionsListResponse&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<EntitymanagerUpdateOptionsListResponse> productUpdateOptionsListWithHttpInfo(EntitymanagerUpdateOptionsListRequest body) throws ApiException {
-        okhttp3.Call localVarCall = productUpdateOptionsListValidateBeforeCall(body, null);
-        Type localVarReturnType = new TypeToken<EntitymanagerUpdateOptionsListResponse>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param body  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A successful response. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call productUpdateOptionsListAsync(EntitymanagerUpdateOptionsListRequest body, final ApiCallback<EntitymanagerUpdateOptionsListResponse> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = productUpdateOptionsListValidateBeforeCall(body, _callback);
-        Type localVarReturnType = new TypeToken<EntitymanagerUpdateOptionsListResponse>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
      * Build call for productUpdateProduct
      * @param body  (required)
      * @param _callback Callback for upload/download progress
@@ -5180,7 +5266,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -5314,7 +5400,7 @@ public class ProductApi {
             localVarHeaderParams.put("Content-Type", localVarContentType);
         }
 
-        String[] localVarAuthNames = new String[] {  };
+        String[] localVarAuthNames = new String[] { "Authorization" };
         return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
@@ -5384,6 +5470,951 @@ public class ProductApi {
 
         okhttp3.Call localVarCall = productUpdateProductV2ValidateBeforeCall(body, _callback);
         Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for removeMediaGalleryEntry
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeMediaGalleryEntryCall(ProductRemoveMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/RemoveMediaGalleryEntry";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call removeMediaGalleryEntryValidateBeforeCall(ProductRemoveMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling removeMediaGalleryEntry(Async)");
+        }
+
+        return removeMediaGalleryEntryCall(body, _callback);
+
+    }
+
+    /**
+     * Remove Media Gallery Entry
+     * The RemoveMediaGalleryEntry endpoint allows users to remove a specific media entry from a product&#39;s gallery. By making a request to this endpoint and providing the tenant ID, product ID, and the unique identifier of the media entry, users can easily manage and update the visual content of a product&#39;s gallery. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object removeMediaGalleryEntry(ProductRemoveMediaGalleryEntryRequest body) throws ApiException {
+        ApiResponse<Object> localVarResp = removeMediaGalleryEntryWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Remove Media Gallery Entry
+     * The RemoveMediaGalleryEntry endpoint allows users to remove a specific media entry from a product&#39;s gallery. By making a request to this endpoint and providing the tenant ID, product ID, and the unique identifier of the media entry, users can easily manage and update the visual content of a product&#39;s gallery. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> removeMediaGalleryEntryWithHttpInfo(ProductRemoveMediaGalleryEntryRequest body) throws ApiException {
+        okhttp3.Call localVarCall = removeMediaGalleryEntryValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Remove Media Gallery Entry (asynchronously)
+     * The RemoveMediaGalleryEntry endpoint allows users to remove a specific media entry from a product&#39;s gallery. By making a request to this endpoint and providing the tenant ID, product ID, and the unique identifier of the media entry, users can easily manage and update the visual content of a product&#39;s gallery. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call removeMediaGalleryEntryAsync(ProductRemoveMediaGalleryEntryRequest body, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = removeMediaGalleryEntryValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateAttributeOptions
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateAttributeOptionsCall(EntitymanagerUpdateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/UpdateAttributeOptions";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateAttributeOptionsValidateBeforeCall(EntitymanagerUpdateAttributeOptionsRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling updateAttributeOptions(Async)");
+        }
+
+        return updateAttributeOptionsCall(body, _callback);
+
+    }
+
+    /**
+     * Update Attribute Options
+     * 
+     * @param body  (required)
+     * @return EntitymanagerUpdateAttributeOptionsResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerUpdateAttributeOptionsResponse updateAttributeOptions(EntitymanagerUpdateAttributeOptionsRequest body) throws ApiException {
+        ApiResponse<EntitymanagerUpdateAttributeOptionsResponse> localVarResp = updateAttributeOptionsWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update Attribute Options
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerUpdateAttributeOptionsResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerUpdateAttributeOptionsResponse> updateAttributeOptionsWithHttpInfo(EntitymanagerUpdateAttributeOptionsRequest body) throws ApiException {
+        okhttp3.Call localVarCall = updateAttributeOptionsValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerUpdateAttributeOptionsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update Attribute Options (asynchronously)
+     * 
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateAttributeOptionsAsync(EntitymanagerUpdateAttributeOptionsRequest body, final ApiCallback<EntitymanagerUpdateAttributeOptionsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateAttributeOptionsValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerUpdateAttributeOptionsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateDataToBeReviewed
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateDataToBeReviewedCall(ProductGetEnhanceProductDataWithAIStatusRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/GetEnhanceProductDataWithAIStatus";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateDataToBeReviewedValidateBeforeCall(ProductGetEnhanceProductDataWithAIStatusRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling updateDataToBeReviewed(Async)");
+        }
+
+        return updateDataToBeReviewedCall(body, _callback);
+
+    }
+
+    /**
+     * Get Enhance Product Data With AI Status
+     * The GetEnhanceProductDataWithAIStatus endpoint allows users to retrieve the status of a product data enhancement process using artificial intelligence (AI) capabilities. By making a request to this endpoint and providing the necessary input data, users can check the progress and completion status of the AI-driven product data enhancement operation. This functionality provides visibility and transparency into the AI processing of product data, enabling users to monitor and track the status of the enhancement process.
+     * @param body  (required)
+     * @return ProductGetEnhanceProductDataWithAIStatusResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductGetEnhanceProductDataWithAIStatusResponse updateDataToBeReviewed(ProductGetEnhanceProductDataWithAIStatusRequest body) throws ApiException {
+        ApiResponse<ProductGetEnhanceProductDataWithAIStatusResponse> localVarResp = updateDataToBeReviewedWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get Enhance Product Data With AI Status
+     * The GetEnhanceProductDataWithAIStatus endpoint allows users to retrieve the status of a product data enhancement process using artificial intelligence (AI) capabilities. By making a request to this endpoint and providing the necessary input data, users can check the progress and completion status of the AI-driven product data enhancement operation. This functionality provides visibility and transparency into the AI processing of product data, enabling users to monitor and track the status of the enhancement process.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductGetEnhanceProductDataWithAIStatusResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductGetEnhanceProductDataWithAIStatusResponse> updateDataToBeReviewedWithHttpInfo(ProductGetEnhanceProductDataWithAIStatusRequest body) throws ApiException {
+        okhttp3.Call localVarCall = updateDataToBeReviewedValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductGetEnhanceProductDataWithAIStatusResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get Enhance Product Data With AI Status (asynchronously)
+     * The GetEnhanceProductDataWithAIStatus endpoint allows users to retrieve the status of a product data enhancement process using artificial intelligence (AI) capabilities. By making a request to this endpoint and providing the necessary input data, users can check the progress and completion status of the AI-driven product data enhancement operation. This functionality provides visibility and transparency into the AI processing of product data, enabling users to monitor and track the status of the enhancement process.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateDataToBeReviewedAsync(ProductGetEnhanceProductDataWithAIStatusRequest body, final ApiCallback<ProductGetEnhanceProductDataWithAIStatusResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateDataToBeReviewedValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductGetEnhanceProductDataWithAIStatusResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateDataToBeReviewed_0
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateDataToBeReviewed_0Call(ProductUpdateDataToBeReviewedRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/UpdateDataToBeReviewed";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateDataToBeReviewed_0ValidateBeforeCall(ProductUpdateDataToBeReviewedRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling updateDataToBeReviewed_0(Async)");
+        }
+
+        return updateDataToBeReviewed_0Call(body, _callback);
+
+    }
+
+    /**
+     * Update Data To Be Reviewed
+     * The UpdateDataToBeReviewed endpoint allows users to update product data that is pending review. By sending a request to this endpoint and providing the necessary input data, users can modify and enhance the product information that is currently under review. This functionality enables users to make changes to product data submissions and ensure that the information is accurate and up-to-date before final approval.
+     * @param body  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object updateDataToBeReviewed_0(ProductUpdateDataToBeReviewedRequest body) throws ApiException {
+        ApiResponse<Object> localVarResp = updateDataToBeReviewed_0WithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update Data To Be Reviewed
+     * The UpdateDataToBeReviewed endpoint allows users to update product data that is pending review. By sending a request to this endpoint and providing the necessary input data, users can modify and enhance the product information that is currently under review. This functionality enables users to make changes to product data submissions and ensure that the information is accurate and up-to-date before final approval.
+     * @param body  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> updateDataToBeReviewed_0WithHttpInfo(ProductUpdateDataToBeReviewedRequest body) throws ApiException {
+        okhttp3.Call localVarCall = updateDataToBeReviewed_0ValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update Data To Be Reviewed (asynchronously)
+     * The UpdateDataToBeReviewed endpoint allows users to update product data that is pending review. By sending a request to this endpoint and providing the necessary input data, users can modify and enhance the product information that is currently under review. This functionality enables users to make changes to product data submissions and ensure that the information is accurate and up-to-date before final approval.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateDataToBeReviewed_0Async(ProductUpdateDataToBeReviewedRequest body, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateDataToBeReviewed_0ValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateMediaGalleryEntry
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateMediaGalleryEntryCall(ProductUpdateMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/UpdateMediaGalleryEntry";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateMediaGalleryEntryValidateBeforeCall(ProductUpdateMediaGalleryEntryRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling updateMediaGalleryEntry(Async)");
+        }
+
+        return updateMediaGalleryEntryCall(body, _callback);
+
+    }
+
+    /**
+     * Update Media Gallery Entry
+     * The UpdateMediaGalleryEntry endpoint allows users to modify and update a specific media entry within a product&#39;s gallery. By sending a request to this endpoint and providing the necessary information, users can efficiently update the media asset, position, and metadata associated with the entry. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return Object
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public Object updateMediaGalleryEntry(ProductUpdateMediaGalleryEntryRequest body) throws ApiException {
+        ApiResponse<Object> localVarResp = updateMediaGalleryEntryWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update Media Gallery Entry
+     * The UpdateMediaGalleryEntry endpoint allows users to modify and update a specific media entry within a product&#39;s gallery. By sending a request to this endpoint and providing the necessary information, users can efficiently update the media asset, position, and metadata associated with the entry. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @return ApiResponse&lt;Object&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Object> updateMediaGalleryEntryWithHttpInfo(ProductUpdateMediaGalleryEntryRequest body) throws ApiException {
+        okhttp3.Call localVarCall = updateMediaGalleryEntryValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update Media Gallery Entry (asynchronously)
+     * The UpdateMediaGalleryEntry endpoint allows users to modify and update a specific media entry within a product&#39;s gallery. By sending a request to this endpoint and providing the necessary information, users can efficiently update the media asset, position, and metadata associated with the entry. This operation is asynchronous and may complete after the response.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateMediaGalleryEntryAsync(ProductUpdateMediaGalleryEntryRequest body, final ApiCallback<Object> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateMediaGalleryEntryValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateOptionsList
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateOptionsListCall(EntitymanagerUpdateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/UpdateOptionsList";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateOptionsListValidateBeforeCall(EntitymanagerUpdateOptionsListRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling updateOptionsList(Async)");
+        }
+
+        return updateOptionsListCall(body, _callback);
+
+    }
+
+    /**
+     * Update Options List
+     * 
+     * @param body  (required)
+     * @return EntitymanagerUpdateOptionsListResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public EntitymanagerUpdateOptionsListResponse updateOptionsList(EntitymanagerUpdateOptionsListRequest body) throws ApiException {
+        ApiResponse<EntitymanagerUpdateOptionsListResponse> localVarResp = updateOptionsListWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update Options List
+     * 
+     * @param body  (required)
+     * @return ApiResponse&lt;EntitymanagerUpdateOptionsListResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<EntitymanagerUpdateOptionsListResponse> updateOptionsListWithHttpInfo(EntitymanagerUpdateOptionsListRequest body) throws ApiException {
+        okhttp3.Call localVarCall = updateOptionsListValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<EntitymanagerUpdateOptionsListResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update Options List (asynchronously)
+     * 
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateOptionsListAsync(EntitymanagerUpdateOptionsListRequest body, final ApiCallback<EntitymanagerUpdateOptionsListResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateOptionsListValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<EntitymanagerUpdateOptionsListResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateProductWithAI
+     * @param body  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateProductWithAICall(ProductUpdateProductWithAIRequest body, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = body;
+
+        // create path and map variables
+        String localVarPath = "/product.Product/UpdateProductWithAI";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "Authorization" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateProductWithAIValidateBeforeCall(ProductUpdateProductWithAIRequest body, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'body' is set
+        if (body == null) {
+            throw new ApiException("Missing the required parameter 'body' when calling updateProductWithAI(Async)");
+        }
+
+        return updateProductWithAICall(body, _callback);
+
+    }
+
+    /**
+     * Update Product With AI
+     * The UpdateProductWithAI endpoint allows users to update an existing product within the system using artificial intelligence (AI) capabilities. By sending a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enhance and optimize the product update process.
+     * @param body  (required)
+     * @return ProductUpdateProductWithAIResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ProductUpdateProductWithAIResponse updateProductWithAI(ProductUpdateProductWithAIRequest body) throws ApiException {
+        ApiResponse<ProductUpdateProductWithAIResponse> localVarResp = updateProductWithAIWithHttpInfo(body);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update Product With AI
+     * The UpdateProductWithAI endpoint allows users to update an existing product within the system using artificial intelligence (AI) capabilities. By sending a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enhance and optimize the product update process.
+     * @param body  (required)
+     * @return ApiResponse&lt;ProductUpdateProductWithAIResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<ProductUpdateProductWithAIResponse> updateProductWithAIWithHttpInfo(ProductUpdateProductWithAIRequest body) throws ApiException {
+        okhttp3.Call localVarCall = updateProductWithAIValidateBeforeCall(body, null);
+        Type localVarReturnType = new TypeToken<ProductUpdateProductWithAIResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update Product With AI (asynchronously)
+     * The UpdateProductWithAI endpoint allows users to update an existing product within the system using artificial intelligence (AI) capabilities. By sending a request to this endpoint and providing the necessary input data, users can leverage AI algorithms to enhance and optimize the product update process.
+     * @param body  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> Unauthorized </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal error occurred is thrown when an incompatible payload is sent </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> An unexpected error response. </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateProductWithAIAsync(ProductUpdateProductWithAIRequest body, final ApiCallback<ProductUpdateProductWithAIResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateProductWithAIValidateBeforeCall(body, _callback);
+        Type localVarReturnType = new TypeToken<ProductUpdateProductWithAIResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **groupCode**| **String** |   | [optional]
 **title**| **Map<String, String>** |   | [optional] [default to new HashMap<>()]
 **renderAs**| [**EntitymanagerRenderAs**](EntitymanagerRenderAs.md) |  for more information please, see Model/EntitymanagerRenderAs.php  | [optional] [default to EntitymanagerRenderAs.DEFAULT]
+**aiContext**| [**EntitymanagerAiContext**](EntitymanagerAiContext.md) |   | [optional]
 
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -3,7 +3,26 @@ info:
   contact:
     email: info@gemini-commerce.com
     name: Gemini Team
-  description: API for managing products
+  description: |-
+    Introducing our revolutionary Product Management Service! Designed to streamline your product inventory and elevate customer experiences, our cutting-edge protobuf service is a game-changer in the world of efficient product management.
+
+    With our service, you can effortlessly create new products, allowing you to quickly bring your ideas to life and expand your catalog. Retrieve product information in a snap, providing accurate and personalized details to your customers based on their specific needs and preferences.
+
+    Stay ahead of the competition by easily updating product information, ensuring your catalog is always up-to-date and optimized. Seamlessly remove products from your inventory when needed, maintaining a clean and relevant product selection.
+
+    Enhance the visual appeal of your products with our advanced media gallery functionalities. Effortlessly add and update captivating images and videos to showcase your products in the best possible light, engaging your customers and driving conversions.
+
+    Personalization is key in today's market, and our service enables you to offer unique options to your customers. Easily create and manage lists of customizable options for your products, providing flexibility and tailoring to individual preferences.
+
+    Attributes play a vital role in defining products, and our service empowers you to effectively manage them. From bulk attribute creation to listing and retrieving attribute options, our service ensures your product information is rich and comprehensive.
+
+    Our service extends its capabilities to entity management, allowing you to effortlessly handle different entities and create customized options lists associated with them. This provides further flexibility and customization options for your product offerings.
+
+    When it comes to bulk updates, our service has you covered. Effortlessly update multiple products simultaneously, saving you time and streamlining your operations.
+
+    Finding specific products and variants is a breeze with our service. Quickly locate products based on their unique stock keeping unit (SKU) values, ensuring efficient inventory management and smooth order fulfillment.
+
+    Experience a new level of efficiency and productivity with our Product Management Service. Unlock the full potential of streamlined product management and empower your business to thrive in today's competitive market. Try our service today and elevate your product management to new heights!
   license:
     name: Gemini fair use license
     url: https://gemini-commerce.com/api/fair-use-license
@@ -11,12 +30,28 @@ info:
   version: v1
 servers:
 - url: https://product.api.gogemini.io/
+security:
+- Authorization: []
 tags:
-- name: Product
+- description: Search Description
+  externalDocs:
+    url: https://gemini-commerce.com/api/product
+  name: Product
 paths:
   /product.Product/AddMediaGalleryEntry:
     post:
-      operationId: Product_AddMediaGalleryEntry
+      description: "The AddMediaGalleryEntry endpoint allows users to add a new media\
+        \ entry to the gallery of a specific product. To make a request to this endpoint,\
+        \ users need to provide the necessary information in the specified format.\
+        \ The request includes the tenant_id to specify the relevant tenant, the product_id\
+        \ to identify the target product, and the asset_grn which represents the globally\
+        \ unique identifier for the media asset being added. Additionally, the position\
+        \ field indicates the desired position of the media entry within the gallery,\
+        \ allowing users to control the order in which the media items are displayed.\
+        \ The metadata field, which is a repeated field, provides the option to include\
+        \ additional metadata associated with the media entry. This operation is asynchronous\
+        \ and may complete after the response."
+      operationId: AddMediaGalleryEntry
       requestBody:
         content:
           application/json:
@@ -29,13 +64,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productAddMediaGalleryEntryResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Add Media Gallery Entry
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -43,7 +92,9 @@ paths:
       x-accepts: application/json
   /product.Product/BulkAddAssetsEntries:
     post:
-      operationId: Product_BulkAddAssetsEntries
+      description: The BulkAddAssetsEntries endpoint allows users to add assets. This
+        operation is asynchronous and may complete after the response.
+      operationId: BulkAddAssetsEntries
       requestBody:
         content:
           application/json:
@@ -56,14 +107,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productBulkAddAssetsEntriesResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
-      summary: Assets endpoints
+      summary: Bulk Add Assets Entries
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -71,6 +135,9 @@ paths:
       x-accepts: application/json
   /product.Product/BulkCreateAttribute:
     post:
+      description: "Allow creation of multiple attributes. If any attribute is invalid,\
+        \ an error will be returned with more details, and in the response body, the\
+        \ attributes created will be returned."
       operationId: Product_BulkCreateAttribute
       requestBody:
         content:
@@ -98,7 +165,8 @@ paths:
       x-accepts: application/json
   /product.Product/BulkDeleteProducts:
     post:
-      operationId: Product_BulkDeleteProducts
+      description: This operation is asynchronous and may complete after the response.
+      operationId: BulkDeleteProducts
       requestBody:
         content:
           application/json:
@@ -111,13 +179,73 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productBulkDeleteProductsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Bulk Delete Products
+      tags:
+      - Product
+      x-codegen-request-body-name: body
+      x-content-type: application/json
+      x-accepts: application/json
+  /product.Product/BulkEnhanceProductDataWithAI:
+    post:
+      description: "The BulkEnhanceProductDataWithAI endpoint allows users to enhance\
+        \ product data using artificial intelligence (AI) capabilities. By making\
+        \ a request to this endpoint and providing the necessary input data, users\
+        \ can leverage AI algorithms to enrich and optimize product information. This\
+        \ operation is asynchronous and may complete after the response."
+      operationId: BulkEnhanceProductDataWithAI
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productBulkEnhanceProductDataWithAIRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productBulkEnhanceProductDataWithAIResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Bulk Enhance Product Data With AI
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -125,7 +253,9 @@ paths:
       x-accepts: application/json
   /product.Product/BulkRemoveAssetsEntries:
     post:
-      operationId: Product_BulkRemoveAssetsEntries
+      description: The BulkRemoveAssetsEntries endpoint allows users to remove assets.
+        This operation is asynchronous and may complete after the response.
+      operationId: BulkRemoveAssetsEntries
       requestBody:
         content:
           application/json:
@@ -138,13 +268,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productBulkRemoveAssetsEntriesResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Bulk Remove Assets Entries
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -153,6 +297,7 @@ paths:
   /product.Product/BulkUpdate:
     post:
       deprecated: true
+      description: This operation is asynchronous and may complete after the response.
       operationId: Product_BulkUpdate
       requestBody:
         content:
@@ -180,7 +325,9 @@ paths:
       x-accepts: application/json
   /product.Product/BulkUpdateAssetsEntries:
     post:
-      operationId: Product_BulkUpdateAssetsEntries
+      description: The BulkUpdateAssetsEntries endpoint allows users to update assets.
+        This operation is asynchronous and may complete after the response.
+      operationId: BulkUpdateAssetsEntries
       requestBody:
         content:
           application/json:
@@ -193,13 +340,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productBulkUpdateAssetsEntriesResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Bulk Update Assets Entries
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -207,7 +368,10 @@ paths:
       x-accepts: application/json
   /product.Product/BulkUpdateV2:
     post:
-      operationId: Product_BulkUpdateV2
+      description: Version 2 of bulk updates for product attributes with enhanced
+        payload structure and response format. This operation is asynchronous and
+        may complete after the response.
+      operationId: BulkUpdateV2
       requestBody:
         content:
           application/json:
@@ -219,14 +383,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/productBulkUpdateResponseV2'
-          description: A successful response.
+                $ref: '#/components/schemas/productBulkUpdateResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Bulk Update Products
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -261,7 +439,9 @@ paths:
       x-accepts: application/json
   /product.Product/CreateAttributeOptions:
     post:
-      operationId: Product_CreateAttributeOptions
+      description: "Create attribute options with specified codes, values, and swatches.\
+        \ Returns created options and any associated errors."
+      operationId: CreateAttributeOptions
       requestBody:
         content:
           application/json:
@@ -274,13 +454,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerCreateAttributeOptionsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Create Attribute Options
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -288,7 +482,17 @@ paths:
       x-accepts: application/json
   /product.Product/CreateEntity:
     post:
-      operationId: Product_CreateEntity
+      description: "The CreateEntity endpoint allows users to define and create a\
+        \ new entity with custom attributes, providing a flexible way to represent\
+        \ and manage different data structures within the system. By making a request\
+        \ to this endpoint, users can create a new entity that serves as an abstraction\
+        \ of a product or any other domain-specific object. This endpoint empowers\
+        \ users to define the specific attributes that compose the entity, such as\
+        \ color, composition, technical details, or any other relevant properties.\
+        \ Utilize the CreateEntity endpoint to dynamically extend and adapt your system's\
+        \ data model to accommodate diverse business requirements and efficiently\
+        \ manage various types of entities."
+      operationId: CreateEntity
       requestBody:
         content:
           application/json:
@@ -301,13 +505,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerCreateEntityResponse'
-          description: A successful response.
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Create Entity
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -315,7 +527,14 @@ paths:
       x-accepts: application/json
   /product.Product/CreateOptionsList:
     post:
-      operationId: Product_CreateOptionsList
+      description: "The CreateOptionsList endpoint allows users to create an OptionList,\
+        \ which represents a list of predefined options for assigning to an attribute.\
+        \ By making a request to this endpoint with the provided request format, users\
+        \ can create a new OptionList by specifying the relevant tenant ID and providing\
+        \ the OptionList object containing the predefined options. This functionality\
+        \ facilitates efficient management and assignment of predefined attribute\
+        \ values, ensuring consistency and flexibility within the system."
+      operationId: CreateOptionsList
       requestBody:
         content:
           application/json:
@@ -328,13 +547,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerCreateOptionsListResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Create Options List
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -349,6 +582,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/productCreateProductRequest'
+        description: The CreateProductRequest message is used to create a new product
+          within the system. It contains various fields that allow specifying the
+          details and attributes of the product.
         required: true
       responses:
         "200":
@@ -390,6 +626,52 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      tags:
+      - Product
+      x-codegen-request-body-name: body
+      x-content-type: application/json
+      x-accepts: application/json
+  /product.Product/CreateProductWithAI:
+    post:
+      description: "The CreateProductWithAI endpoint allows users to create a new\
+        \ product within the system using artificial intelligence (AI) capabilities.\
+        \ By sending a request to this endpoint and providing the necessary input\
+        \ data, users can leverage AI algorithms to enhance and optimize the product\
+        \ creation process."
+      operationId: CreateProductWithAI
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productCreateProductWithAIRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productCreateProductWithAIResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Create Product With AI
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -506,7 +788,9 @@ paths:
       x-accepts: application/json
   /product.Product/GetAttributeOption:
     post:
-      operationId: Product_GetAttributeOption
+      description: "Retrieve attribute option details by providing the tenant ID,\
+        \ list code, and option ID. Returns the specified attribute option."
+      operationId: GetAttributeOption
       requestBody:
         content:
           application/json:
@@ -519,13 +803,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerGetAttributeOptionResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Get Attribute Option
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -533,7 +831,9 @@ paths:
       x-accepts: application/json
   /product.Product/GetAttributeOptions:
     post:
-      operationId: Product_GetAttributeOptions
+      description: Retrieve a list of attribute options based on the provided tenant
+        ID and list code.
+      operationId: GetAttributeOptions
       requestBody:
         content:
           application/json:
@@ -546,13 +846,75 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerGetAttributeOptionsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Get Attribute Options
+      tags:
+      - Product
+      x-codegen-request-body-name: body
+      x-content-type: application/json
+      x-accepts: application/json
+  /product.Product/GetEnhanceProductDataWithAIStatus:
+    post:
+      description: "The GetEnhanceProductDataWithAIStatus endpoint allows users to\
+        \ retrieve the status of a product data enhancement process using artificial\
+        \ intelligence (AI) capabilities. By making a request to this endpoint and\
+        \ providing the necessary input data, users can check the progress and completion\
+        \ status of the AI-driven product data enhancement operation. This functionality\
+        \ provides visibility and transparency into the AI processing of product data,\
+        \ enabling users to monitor and track the status of the enhancement process."
+      operationId: UpdateDataToBeReviewed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productGetEnhanceProductDataWithAIStatusRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productGetEnhanceProductDataWithAIStatusResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Enhance Product Data With AI Status
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -560,7 +922,10 @@ paths:
       x-accepts: application/json
   /product.Product/GetEntity:
     post:
-      operationId: Product_GetEntity
+      description: "Retrieve details of an entity by providing the tenant ID and either\
+        \ entity data or entity ID. Returns information including ID, type, code,\
+        \ label, relationships, and attributes."
+      operationId: GetEntity
       requestBody:
         content:
           application/json:
@@ -573,13 +938,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerEntity'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Get Entity Details
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -587,7 +966,8 @@ paths:
       x-accepts: application/json
   /product.Product/GetOptionsList:
     post:
-      operationId: Product_GetOptionsList
+      description: Retrieve option lists.
+      operationId: GetOptionsList
       requestBody:
         content:
           application/json:
@@ -600,13 +980,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerGetOptionsListResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Get Options List
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -614,7 +1008,10 @@ paths:
       x-accepts: application/json
   /product.Product/GetProduct:
     post:
-      operationId: Product_GetProduct
+      description: "The GetProduct endpoint enables users to retrieve a product from\
+        \ the system. By sending a request to this endpoint, users can retrieve a\
+        \ product by providing its unique identifier."
+      operationId: GetProduct
       requestBody:
         content:
           application/json:
@@ -627,13 +1024,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productGetProductResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Get Product
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -641,7 +1052,10 @@ paths:
       x-accepts: application/json
   /product.Product/GetProductByCode:
     post:
-      operationId: Product_GetProductByCode
+      description: "The GetProductByCode endpoint enables users to retrieve a product\
+        \ from the system. By sending a request to this endpoint, users can retrieve\
+        \ a product by providing its unique code."
+      operationId: GetProductByCode
       requestBody:
         content:
           application/json:
@@ -654,13 +1068,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productGetProductByCodeResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Get Product By Code
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -668,7 +1096,10 @@ paths:
       x-accepts: application/json
   /product.Product/GetProductByUrlKey:
     post:
-      operationId: Product_GetProductByUrlKey
+      description: "The GetProductByUrlKey endpoint enables users to retrieve a product\
+        \ from the system. By sending a request to this endpoint, users can retrieve\
+        \ a product by providing its unique url key."
+      operationId: GetProductByUrlKey
       requestBody:
         content:
           application/json:
@@ -681,13 +1112,74 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productGetProductByUrlKeyResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Get Product By Url Key
+      tags:
+      - Product
+      x-codegen-request-body-name: body
+      x-content-type: application/json
+      x-accepts: application/json
+  /product.Product/GetProductDataInReview:
+    post:
+      description: "The GetProductDataInReview endpoint allows users to retrieve product\
+        \ data that is currently under review. By making a request to this endpoint,\
+        \ users can access detailed information about the product data that is pending\
+        \ approval or review by authorized personnel. This functionality provides\
+        \ transparency and visibility into the product data review process, enabling\
+        \ users to track the status and progress of product data submissions."
+      operationId: GetProductDataInReview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productGetProductDataInReviewRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productGetProductDataInReviewResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Get Product Data In Review
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -715,7 +1207,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
-      summary: Attribute Groups endpoints
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -723,7 +1214,7 @@ paths:
       x-accepts: application/json
   /product.Product/ListAttributeOptions:
     post:
-      operationId: Product_ListAttributeOptions
+      operationId: ListAttributeOptions
       requestBody:
         content:
           application/json:
@@ -736,13 +1227,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerListAttributeOptionsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: List Attribute Options
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -750,7 +1255,7 @@ paths:
       x-accepts: application/json
   /product.Product/ListEntities:
     post:
-      operationId: Product_ListEntities
+      operationId: ListEntities
       requestBody:
         content:
           application/json:
@@ -763,13 +1268,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerListEntitiesResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: List Entities
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -777,7 +1296,16 @@ paths:
       x-accepts: application/json
   /product.Product/ListOptionsLists:
     post:
-      operationId: Product_ListOptionsLists
+      description: "The ListOptionsLists endpoint allows users to retrieve a list\
+        \ of OptionLists available in the system. By making a request to this endpoint\
+        \ with the provided request format, users can obtain all the OptionLists associated\
+        \ with the specified tenant. This functionality enables users to access and\
+        \ manage the predefined options available for various attributes within the\
+        \ system. Utilizing the ListOptionsLists endpoint provides a convenient way\
+        \ to retrieve and work with OptionLists, facilitating efficient management\
+        \ of attribute options and ensuring consistency in attribute values throughout\
+        \ the system."
+      operationId: ListOptionsLists
       requestBody:
         content:
           application/json:
@@ -790,13 +1318,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerListOptionsListsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: List Options Lists
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -804,7 +1346,13 @@ paths:
       x-accepts: application/json
   /product.Product/ListProducts:
     post:
-      operationId: Product_ListProducts
+      description: "The ListProducts endpoint provides users with the ability to retrieve\
+        \ a filtered list of products based on specific criteria. By including filter\
+        \ parameters in the request, users can customize the response to only include\
+        \ products that meet certain conditions, such as price range, category, availability,\
+        \ or any other relevant attributes. This endpoint empowers users to efficiently\
+        \ narrow down the product selection and retrieve tailored results."
+      operationId: ListProducts
       requestBody:
         content:
           application/json:
@@ -817,13 +1365,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productListProductsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: List Products
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -831,7 +1393,13 @@ paths:
       x-accepts: application/json
   /product.Product/ListProductsByIds:
     post:
-      operationId: Product_ListProductsByIds
+      description: "The ListProductsByIds endpoint allows users to retrieve a list\
+        \ of products based on provided IDs. By making a request to this endpoint\
+        \ and specifying a set of product IDs, users can retrieve detailed information\
+        \ about the corresponding products. This endpoint facilitates efficient retrieval\
+        \ of specific products, enabling applications to display accurate and targeted\
+        \ product information to users."
+      operationId: ListProductsByIds
       requestBody:
         content:
           application/json:
@@ -844,13 +1412,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productListProductsByIdsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: List Products By Ids
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -858,7 +1440,7 @@ paths:
       x-accepts: application/json
   /product.Product/ListProductsBySku:
     post:
-      operationId: Product_ListProductsBySku
+      operationId: ListProductsBySku
       requestBody:
         content:
           application/json:
@@ -871,13 +1453,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productListProductsBySkuResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: List Products By Sku
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -885,7 +1481,7 @@ paths:
       x-accepts: application/json
   /product.Product/ListVariantsBySku:
     post:
-      operationId: Product_ListVariantsBySku
+      operationId: ListVariantsBySku
       requestBody:
         content:
           application/json:
@@ -898,13 +1494,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productListVariantsBySkuResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: List Product Variants By Sku
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -912,7 +1522,13 @@ paths:
       x-accepts: application/json
   /product.Product/RemoveMediaGalleryEntry:
     post:
-      operationId: Product_RemoveMediaGalleryEntry
+      description: "The RemoveMediaGalleryEntry endpoint allows users to remove a\
+        \ specific media entry from a product's gallery. By making a request to this\
+        \ endpoint and providing the tenant ID, product ID, and the unique identifier\
+        \ of the media entry, users can easily manage and update the visual content\
+        \ of a product's gallery. This operation is asynchronous and may complete\
+        \ after the response."
+      operationId: RemoveMediaGalleryEntry
       requestBody:
         content:
           application/json:
@@ -925,13 +1541,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productRemoveMediaGalleryEntryResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Remove Media Gallery Entry
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -993,7 +1623,7 @@ paths:
       x-accepts: application/json
   /product.Product/UpdateAttributeOptions:
     post:
-      operationId: Product_UpdateAttributeOptions
+      operationId: UpdateAttributeOptions
       requestBody:
         content:
           application/json:
@@ -1006,15 +1636,74 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerUpdateAttributeOptionsResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
-      summary: "rpc GetAttributeOptionByCode (product.entitymanager.GetAttributeOptionByCodeRequest)\
-        \ returns (product.entitymanager.GetAttributeOptionByCodeResponse) {}"
+      summary: Update Attribute Options
+      tags:
+      - Product
+      x-codegen-request-body-name: body
+      x-content-type: application/json
+      x-accepts: application/json
+  /product.Product/UpdateDataToBeReviewed:
+    post:
+      description: "The UpdateDataToBeReviewed endpoint allows users to update product\
+        \ data that is pending review. By sending a request to this endpoint and providing\
+        \ the necessary input data, users can modify and enhance the product information\
+        \ that is currently under review. This functionality enables users to make\
+        \ changes to product data submissions and ensure that the information is accurate\
+        \ and up-to-date before final approval."
+      operationId: UpdateDataToBeReviewed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productUpdateDataToBeReviewedRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productUpdateDataToBeReviewedResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Update Data To Be Reviewed
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -1022,7 +1711,12 @@ paths:
       x-accepts: application/json
   /product.Product/UpdateMediaGalleryEntry:
     post:
-      operationId: Product_UpdateMediaGalleryEntry
+      description: "The UpdateMediaGalleryEntry endpoint allows users to modify and\
+        \ update a specific media entry within a product's gallery. By sending a request\
+        \ to this endpoint and providing the necessary information, users can efficiently\
+        \ update the media asset, position, and metadata associated with the entry.\
+        \ This operation is asynchronous and may complete after the response."
+      operationId: UpdateMediaGalleryEntry
       requestBody:
         content:
           application/json:
@@ -1035,13 +1729,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/productUpdateMediaGalleryEntryResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Update Media Gallery Entry
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -1049,7 +1757,7 @@ paths:
       x-accepts: application/json
   /product.Product/UpdateOptionsList:
     post:
-      operationId: Product_UpdateOptionsList
+      operationId: UpdateOptionsList
       requestBody:
         content:
           application/json:
@@ -1062,13 +1770,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/entitymanagerUpdateOptionsListResponse'
-          description: A successful response.
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
         default:
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/rpcStatus'
           description: An unexpected error response.
+      summary: Update Options List
       tags:
       - Product
       x-codegen-request-body-name: body
@@ -1129,8 +1851,64 @@ paths:
       x-codegen-request-body-name: body
       x-content-type: application/json
       x-accepts: application/json
+  /product.Product/UpdateProductWithAI:
+    post:
+      description: "The UpdateProductWithAI endpoint allows users to update an existing\
+        \ product within the system using artificial intelligence (AI) capabilities.\
+        \ By sending a request to this endpoint and providing the necessary input\
+        \ data, users can leverage AI algorithms to enhance and optimize the product\
+        \ update process."
+      operationId: UpdateProductWithAI
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productUpdateProductWithAIRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/productUpdateProductWithAIResponse'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An internal error occurred is thrown when an incompatible payload
+            is sent
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      summary: Update Product With AI
+      tags:
+      - Product
+      x-codegen-request-body-name: body
+      x-content-type: application/json
+      x-accepts: application/json
 components:
   schemas:
+    AttributeInReviewString:
+      example:
+        locale: locale
+        value: value
+      properties:
+        value:
+          type: string
+        locale:
+          type: string
+      type: object
     BulkUpdateAssetsEntriesRequestUpdateEntity:
       properties:
         id:
@@ -1138,6 +1916,37 @@ components:
         payload:
           $ref: '#/components/schemas/productUpdateAssetEntryPayload'
         payloadMask:
+          type: string
+      type: object
+    GetEnhanceProductDataWithAIStatusResponseJob:
+      example:
+        jobStatus: null
+        executedAt: 2000-01-23T04:56:07.000+00:00
+        productId: productId
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        jobType: null
+        parentId: parentId
+        finishedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        parentId:
+          type: string
+        jobType:
+          $ref: '#/components/schemas/productAttributeInReviewJobType'
+        jobStatus:
+          $ref: '#/components/schemas/productAttributeInReviewJobStatus'
+        id:
+          type: string
+        startedAt:
+          format: date-time
+          type: string
+        executedAt:
+          format: date-time
+          type: string
+        finishedAt:
+          format: date-time
+          type: string
+        productId:
           type: string
       type: object
     ListProductsRequestFilter:
@@ -1158,6 +1967,28 @@ components:
         status:
           type: boolean
       type: object
+    TranslateActionAll:
+      type: object
+    TranslateActionAttributeCodesToTranslate:
+      properties:
+        codes:
+          items:
+            type: string
+          type: array
+      type: object
+    entitymanagerAiContext:
+      example:
+        minLength: minLength
+        description: description
+        maxLength: maxLength
+      properties:
+        minLength:
+          type: string
+        maxLength:
+          type: string
+        description:
+          type: string
+      type: object
     entitymanagerAttribute:
       example:
         isRequired: true
@@ -1174,6 +2005,10 @@ components:
         isSystem: true
         default: default
         entity: entity
+        aiContext:
+          minLength: minLength
+          description: description
+          maxLength: maxLength
         groupCode: groupCode
       properties:
         entityId:
@@ -1207,6 +2042,8 @@ components:
           type: object
         renderAs:
           $ref: '#/components/schemas/entitymanagerRenderAs'
+        aiContext:
+          $ref: '#/components/schemas/entitymanagerAiContext'
       type: object
     entitymanagerAttributeGroup:
       example:
@@ -1348,6 +2185,10 @@ components:
           isSystem: true
           default: default
           entity: entity
+          aiContext:
+            minLength: minLength
+            description: description
+            maxLength: maxLength
           groupCode: groupCode
         - isRequired: true
           code: code
@@ -1363,6 +2204,10 @@ components:
           isSystem: true
           default: default
           entity: entity
+          aiContext:
+            minLength: minLength
+            description: description
+            maxLength: maxLength
           groupCode: groupCode
       properties:
         attributes:
@@ -1469,6 +2314,10 @@ components:
             isSystem: true
             default: default
             entity: entity
+            aiContext:
+              minLength: minLength
+              description: description
+              maxLength: maxLength
             groupCode: groupCode
           - isRequired: true
             code: code
@@ -1484,6 +2333,10 @@ components:
             isSystem: true
             default: default
             entity: entity
+            aiContext:
+              minLength: minLength
+              description: description
+              maxLength: maxLength
             groupCode: groupCode
           id: id
           label: label
@@ -1552,6 +2405,10 @@ components:
           isSystem: true
           default: default
           entity: entity
+          aiContext:
+            minLength: minLength
+            description: description
+            maxLength: maxLength
           groupCode: groupCode
         - isRequired: true
           code: code
@@ -1567,6 +2424,10 @@ components:
           isSystem: true
           default: default
           entity: entity
+          aiContext:
+            minLength: minLength
+            description: description
+            maxLength: maxLength
           groupCode: groupCode
         id: id
         label: label
@@ -1843,6 +2704,10 @@ components:
             isSystem: true
             default: default
             entity: entity
+            aiContext:
+              minLength: minLength
+              description: description
+              maxLength: maxLength
             groupCode: groupCode
           - isRequired: true
             code: code
@@ -1858,6 +2723,10 @@ components:
             isSystem: true
             default: default
             entity: entity
+            aiContext:
+              minLength: minLength
+              description: description
+              maxLength: maxLength
             groupCode: groupCode
           id: id
           label: label
@@ -1883,6 +2752,10 @@ components:
             isSystem: true
             default: default
             entity: entity
+            aiContext:
+              minLength: minLength
+              description: description
+              maxLength: maxLength
             groupCode: groupCode
           - isRequired: true
             code: code
@@ -1898,6 +2771,10 @@ components:
             isSystem: true
             default: default
             entity: entity
+            aiContext:
+              minLength: minLength
+              description: description
+              maxLength: maxLength
             groupCode: groupCode
           id: id
           label: label
@@ -2071,6 +2948,8 @@ components:
           type: object
         renderAs:
           $ref: '#/components/schemas/entitymanagerRenderAs'
+        aiContext:
+          $ref: '#/components/schemas/entitymanagerAiContext'
       type: object
     entitymanagerUpdateOptionsListRequest:
       properties:
@@ -2253,6 +3132,88 @@ components:
         alt:
           $ref: '#/components/schemas/productLocalizedText'
       type: object
+    productAttributeInReview:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        jobId: jobId
+        code: code
+        boolean: true
+        string:
+          locale: locale
+          value: value
+        int32: 0
+        int64: int64
+        float32: 6.0274563
+        float64: 1.4658129805029452
+        source: null
+        jobType: null
+        error:
+          reason: reason
+          code: code
+      properties:
+        code:
+          type: string
+        string:
+          $ref: '#/components/schemas/AttributeInReviewString'
+        int32:
+          format: int32
+          type: integer
+        int64:
+          format: int64
+          type: string
+        float32:
+          format: float
+          type: number
+        float64:
+          format: double
+          type: number
+        boolean:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/productAttributeInReviewSource'
+        createdAt:
+          format: date-time
+          type: string
+        jobId:
+          type: string
+        jobType:
+          $ref: '#/components/schemas/productAttributeInReviewJobType'
+        error:
+          $ref: '#/components/schemas/productAttributeInReviewError'
+      type: object
+    productAttributeInReviewError:
+      example:
+        reason: reason
+        code: code
+      properties:
+        code:
+          type: string
+        reason:
+          type: string
+      type: object
+    productAttributeInReviewJobStatus:
+      default: ATTRIBUTE_IN_REVIEW_STATUS_UNKNOWN
+      enum:
+      - ATTRIBUTE_IN_REVIEW_STATUS_UNKNOWN
+      - ATTRIBUTE_IN_REVIEW_STATUS_RUNNING
+      - ATTRIBUTE_IN_REVIEW_STATUS_COMPLETED
+      - ATTRIBUTE_IN_REVIEW_STATUS_FAILED
+      - ATTRIBUTE_IN_REVIEW_STATUS_CANCELED
+      - ATTRIBUTE_IN_REVIEW_STATUS_TERMINATED
+      type: string
+    productAttributeInReviewJobType:
+      default: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
+      enum:
+      - ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
+      - ATTRIBUTE_IN_REVIEW_JOB_TYPE_ENRICHMENT
+      - ATTRIBUTE_IN_REVIEW_JOB_TYPE_TRANSLATION
+      type: string
+    productAttributeInReviewSource:
+      default: ATTRIBUTE_IN_REVIEW_SOURCE_UNKNOWN
+      enum:
+      - ATTRIBUTE_IN_REVIEW_SOURCE_UNKNOWN
+      - ATTRIBUTE_IN_REVIEW_SOURCE_AI
+      type: string
     productAttributeResponseError:
       example:
         attributeCode: attributeCode
@@ -2266,6 +3227,28 @@ components:
         attributeCode:
           type: string
       type: object
+    productAttributeToEnrich:
+      properties:
+        code:
+          type: string
+        type:
+          $ref: '#/components/schemas/productAttributeToEnrichType'
+        canCreateValue:
+          type: boolean
+      type: object
+    productAttributeToEnrichType:
+      default: ATTRIBUTE_TO_ENRICH_TYPE_UNKNOWN
+      enum:
+      - ATTRIBUTE_TO_ENRICH_TYPE_UNKNOWN
+      - ATTRIBUTE_TO_ENRICH_TYPE_TEXT
+      - ATTRIBUTE_TO_ENRICH_TYPE_NUMBER
+      - ATTRIBUTE_TO_ENRICH_TYPE_BOOLEAN
+      - ATTRIBUTE_TO_ENRICH_TYPE_DATETIME
+      - ATTRIBUTE_TO_ENRICH_TYPE_EXTERNAL
+      - ATTRIBUTE_TO_ENRICH_TYPE_EMBED
+      - ATTRIBUTE_TO_ENRICH_TYPE_FLOAT32
+      - ATTRIBUTE_TO_ENRICH_TYPE_LOCALIZED_TEXT
+      type: string
     productBulkAddAssetsEntriesRequest:
       properties:
         tenantId:
@@ -2340,6 +3323,23 @@ components:
           type: array
       type: object
     productBulkDeleteProductsResponse:
+      type: object
+    productBulkEnhanceProductDataWithAIRequest:
+      properties:
+        tenantId:
+          type: string
+        enrich:
+          $ref: '#/components/schemas/productEnrichAction'
+        translate:
+          $ref: '#/components/schemas/productTranslateAction'
+        productIds:
+          items:
+            type: string
+          type: array
+        skipReview:
+          type: boolean
+      type: object
+    productBulkEnhanceProductDataWithAIResponse:
       type: object
     productBulkRemoveAssetsEntriesRequest:
       properties:
@@ -2495,16 +3495,6 @@ components:
           type: object
       type: object
     productBulkUpdateResponseV2:
-      example:
-        productResponse:
-        - productId: productId
-          attributes:
-            key:
-              '@type': '@type'
-        - productId: productId
-          attributes:
-            key:
-              '@type': '@type'
       properties:
         productResponse:
           items:
@@ -2512,11 +3502,6 @@ components:
           type: array
       type: object
     productBulkUpdateResponseV2Response:
-      example:
-        productId: productId
-        attributes:
-          key:
-            '@type': '@type'
       properties:
         productId:
           type: string
@@ -2526,31 +3511,69 @@ components:
           type: object
       type: object
     productCreateProductRequest:
+      description: The CreateProductRequest message is used to create a new product
+        within the system. It contains various fields that allow specifying the details
+        and attributes of the product.
+      example:
+        tenant_id: 00000000-0000-0000-0000-000000000000
+        entity_type: product
+        entity_code: __DEFAULT__
+        code: best-sneakers
+        is_configurable: false
+        url_key:
+          value:
+            default: best-sneakers
+            en_US: best-sneakers
+            it_IT: migliori-sneakers
+        attributes:
+          name:
+            '@type': type.googleapis.com/google.protobuf.StringValue
+            value: Best Sneakers
       properties:
         tenantId:
+          description: Represents the ID of the tenant associated with the product.
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          title: string
           type: string
         entityType:
+          description: Specifies the type of entity for the product.
+          title: string
           type: string
         entityCode:
+          description: Indicates the code of the entity associated with the product.
+          title: string
           type: string
         code:
+          description: Represents the unique code or identifier for the product.
+          title: string
           type: string
         isConfigurable:
+          description: Specifies whether the product has variants or not.
+          title: boolean
           type: boolean
         variantAttributes:
+          description: Contains a list of attributes specific to the product variants.
           items:
             type: string
+          title: "string[]"
           type: array
         isVirtual:
+          description: Indicates whether the product is virtual or not.
+          title: boolean
           type: boolean
         isGiftcard:
+          description: Specifies whether the product is a gift card or not.
+          title: boolean
           type: boolean
         hasConfigurator:
           type: boolean
         urlKey:
           $ref: '#/components/schemas/productLocalizedText'
         maxSaleableQuantity:
+          description: Specifies the maximum quantity that can be sold for the product
+            in each order.
           format: int64
+          title: int64
           type: integer
         mediaVariantAttributes:
           items:
@@ -2559,11 +3582,18 @@ components:
         attributes:
           additionalProperties:
             $ref: '#/components/schemas/protobufAny'
+          description: "Contains a map of additional attributes associated with the\
+            \ product, where the key is the attribute name and the value is any type\
+            \ of value."
           type: object
         variants:
           additionalProperties:
             $ref: '#/components/schemas/productProductVariant'
+          description: "Represents a map of product variants associated with the product,\
+            \ where the key is the variant ID or code, and the value is a ProductVariant\
+            \ message."
           type: object
+      title: Create Product Request
       type: object
     productCreateProductRequestV2:
       properties:
@@ -2606,6 +3636,10 @@ components:
           type: array
       type: object
     productCreateProductResponse:
+      description: The CreateProductResponse message is used to provide a response
+        after creating a product within the system. It includes fields that indicate
+        the success of the product creation and any errors encountered during the
+        process.
       example:
         attributeErrors:
         - attributeCode: attributeCode
@@ -2623,17 +3657,28 @@ components:
         id: id
       properties:
         success:
+          description: Indicates whether the product creation was successful or not.
+          title: boolean
           type: boolean
         id:
+          description: Represents the ID of the created product.
+          title: string
           type: string
         productErrors:
+          description: "Contains a list of ProductResponseError messages, indicating\
+            \ any errors related to the product creation."
           items:
             $ref: '#/components/schemas/productProductResponseError'
+          title: "ProductResponseError[]"
           type: array
         attributeErrors:
+          description: "Contains a list of AttributeResponseError messages, indicating\
+            \ any errors related to the attributes of the product."
           items:
             $ref: '#/components/schemas/productAttributeResponseError'
+          title: "AttributeResponseError[]"
           type: array
+      title: Create Product Response
       type: object
     productCreateProductResponseV2:
       example:
@@ -2641,6 +3686,75 @@ components:
       properties:
         id:
           type: string
+      type: object
+    productCreateProductWithAIRequest:
+      properties:
+        tenantId:
+          type: string
+        product:
+          $ref: '#/components/schemas/productCreateProductRequestV2'
+        locale:
+          type: string
+        productBrand:
+          type: string
+        productCode:
+          type: string
+        productName:
+          type: string
+        skipReview:
+          type: boolean
+        attributesToEnrich:
+          items:
+            $ref: '#/components/schemas/productAttributeToEnrich'
+          type: array
+      type: object
+    productCreateProductWithAIResponse:
+      example:
+        id: id
+      properties:
+        id:
+          type: string
+      type: object
+    productDataInReview:
+      example:
+        attributes:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          jobId: jobId
+          code: code
+          boolean: true
+          string:
+            locale: locale
+            value: value
+          int32: 0
+          int64: int64
+          float32: 6.0274563
+          float64: 1.4658129805029452
+          source: null
+          jobType: null
+          error:
+            reason: reason
+            code: code
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          jobId: jobId
+          code: code
+          boolean: true
+          string:
+            locale: locale
+            value: value
+          int32: 0
+          int64: int64
+          float32: 6.0274563
+          float64: 1.4658129805029452
+          source: null
+          jobType: null
+          error:
+            reason: reason
+            code: code
+      properties:
+        attributes:
+          items:
+            $ref: '#/components/schemas/productAttributeInReview'
+          type: array
       type: object
     productDeleteProductRequest:
       properties:
@@ -2663,11 +3777,50 @@ components:
         success:
           type: boolean
       type: object
+    productEnrichAction:
+      properties:
+        attributesToEnrich:
+          items:
+            $ref: '#/components/schemas/productAttributeToEnrich'
+          type: array
+        generationLanguage:
+          $ref: '#/components/schemas/productLanguageCode'
+      type: object
     productFieldMask:
       properties:
         paths:
           items:
             type: string
+          type: array
+      type: object
+    productGetEnhanceProductDataWithAIStatusRequest:
+      properties:
+        tenantId:
+          type: string
+      type: object
+    productGetEnhanceProductDataWithAIStatusResponse:
+      example:
+        jobs:
+        - jobStatus: null
+          executedAt: 2000-01-23T04:56:07.000+00:00
+          productId: productId
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          jobType: null
+          parentId: parentId
+          finishedAt: 2000-01-23T04:56:07.000+00:00
+        - jobStatus: null
+          executedAt: 2000-01-23T04:56:07.000+00:00
+          productId: productId
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          jobType: null
+          parentId: parentId
+          finishedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        jobs:
+          items:
+            $ref: '#/components/schemas/GetEnhanceProductDataWithAIStatusResponseJob'
           type: array
       type: object
     productGetProductByCodeRequest:
@@ -2680,6 +3833,7 @@ components:
     productGetProductByCodeResponse:
       example:
         product:
+          inReview: true
           grn: grn
           entityCode: entityCode
           code: code
@@ -2809,6 +3963,7 @@ components:
     productGetProductByUrlKeyResponse:
       example:
         product:
+          inReview: true
           grn: grn
           entityCode: entityCode
           code: code
@@ -2925,6 +4080,53 @@ components:
       properties:
         product:
           $ref: '#/components/schemas/productProductEntity'
+      type: object
+    productGetProductDataInReviewRequest:
+      properties:
+        tenantId:
+          type: string
+        id:
+          type: string
+      type: object
+    productGetProductDataInReviewResponse:
+      example:
+        dataInReview:
+          attributes:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            jobId: jobId
+            code: code
+            boolean: true
+            string:
+              locale: locale
+              value: value
+            int32: 0
+            int64: int64
+            float32: 6.0274563
+            float64: 1.4658129805029452
+            source: null
+            jobType: null
+            error:
+              reason: reason
+              code: code
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            jobId: jobId
+            code: code
+            boolean: true
+            string:
+              locale: locale
+              value: value
+            int32: 0
+            int64: int64
+            float32: 6.0274563
+            float64: 1.4658129805029452
+            source: null
+            jobType: null
+            error:
+              reason: reason
+              code: code
+      properties:
+        dataInReview:
+          $ref: '#/components/schemas/productDataInReview'
       type: object
     productGetProductRequest:
       properties:
@@ -2936,6 +4138,7 @@ components:
     productGetProductResponse:
       example:
         product:
+          inReview: true
           grn: grn
           entityCode: entityCode
           code: code
@@ -3053,6 +4256,380 @@ components:
         product:
           $ref: '#/components/schemas/productProductEntity'
       type: object
+    productLanguageCode:
+      default: LANGUAGE_CODE_UNKNOWN
+      enum:
+      - LANGUAGE_CODE_UNKNOWN
+      - LANGUAGE_CODE_AA
+      - LANGUAGE_CODE_AB
+      - LANGUAGE_CODE_AE
+      - LANGUAGE_CODE_AF
+      - LANGUAGE_CODE_AK
+      - LANGUAGE_CODE_AM
+      - LANGUAGE_CODE_AN
+      - LANGUAGE_CODE_AR
+      - LANGUAGE_CODE_AS
+      - LANGUAGE_CODE_AV
+      - LANGUAGE_CODE_AY
+      - LANGUAGE_CODE_AZ
+      - LANGUAGE_CODE_BA
+      - LANGUAGE_CODE_BE
+      - LANGUAGE_CODE_BG
+      - LANGUAGE_CODE_BH
+      - LANGUAGE_CODE_BM
+      - LANGUAGE_CODE_BI
+      - LANGUAGE_CODE_BN
+      - LANGUAGE_CODE_BO
+      - LANGUAGE_CODE_BR
+      - LANGUAGE_CODE_BS
+      - LANGUAGE_CODE_CA
+      - LANGUAGE_CODE_CE
+      - LANGUAGE_CODE_CH
+      - LANGUAGE_CODE_CO
+      - LANGUAGE_CODE_CR
+      - LANGUAGE_CODE_CS
+      - LANGUAGE_CODE_CU
+      - LANGUAGE_CODE_CV
+      - LANGUAGE_CODE_CY
+      - LANGUAGE_CODE_DA
+      - LANGUAGE_CODE_DE
+      - LANGUAGE_CODE_DV
+      - LANGUAGE_CODE_DZ
+      - LANGUAGE_CODE_EE
+      - LANGUAGE_CODE_EL
+      - LANGUAGE_CODE_EN
+      - LANGUAGE_CODE_EO
+      - LANGUAGE_CODE_ES
+      - LANGUAGE_CODE_ET
+      - LANGUAGE_CODE_EU
+      - LANGUAGE_CODE_FA
+      - LANGUAGE_CODE_FF
+      - LANGUAGE_CODE_FI
+      - LANGUAGE_CODE_FJ
+      - LANGUAGE_CODE_FO
+      - LANGUAGE_CODE_FR
+      - LANGUAGE_CODE_FY
+      - LANGUAGE_CODE_GA
+      - LANGUAGE_CODE_GD
+      - LANGUAGE_CODE_GL
+      - LANGUAGE_CODE_GN
+      - LANGUAGE_CODE_GU
+      - LANGUAGE_CODE_GV
+      - LANGUAGE_CODE_HA
+      - LANGUAGE_CODE_HE
+      - LANGUAGE_CODE_HI
+      - LANGUAGE_CODE_HO
+      - LANGUAGE_CODE_HR
+      - LANGUAGE_CODE_HT
+      - LANGUAGE_CODE_HU
+      - LANGUAGE_CODE_HY
+      - LANGUAGE_CODE_HZ
+      - LANGUAGE_CODE_IA
+      - LANGUAGE_CODE_ID
+      - LANGUAGE_CODE_IE
+      - LANGUAGE_CODE_IG
+      - LANGUAGE_CODE_II
+      - LANGUAGE_CODE_IK
+      - LANGUAGE_CODE_IO
+      - LANGUAGE_CODE_IS
+      - LANGUAGE_CODE_IT
+      - LANGUAGE_CODE_IU
+      - LANGUAGE_CODE_JA
+      - LANGUAGE_CODE_JV
+      - LANGUAGE_CODE_KA
+      - LANGUAGE_CODE_KG
+      - LANGUAGE_CODE_KI
+      - LANGUAGE_CODE_KJ
+      - LANGUAGE_CODE_KK
+      - LANGUAGE_CODE_KL
+      - LANGUAGE_CODE_KM
+      - LANGUAGE_CODE_KN
+      - LANGUAGE_CODE_KO
+      - LANGUAGE_CODE_KR
+      - LANGUAGE_CODE_KS
+      - LANGUAGE_CODE_KU
+      - LANGUAGE_CODE_KV
+      - LANGUAGE_CODE_KW
+      - LANGUAGE_CODE_KY
+      - LANGUAGE_CODE_LA
+      - LANGUAGE_CODE_LB
+      - LANGUAGE_CODE_LG
+      - LANGUAGE_CODE_LI
+      - LANGUAGE_CODE_LN
+      - LANGUAGE_CODE_LO
+      - LANGUAGE_CODE_LT
+      - LANGUAGE_CODE_LU
+      - LANGUAGE_CODE_LV
+      - LANGUAGE_CODE_MG
+      - LANGUAGE_CODE_MH
+      - LANGUAGE_CODE_MI
+      - LANGUAGE_CODE_MK
+      - LANGUAGE_CODE_ML
+      - LANGUAGE_CODE_MN
+      - LANGUAGE_CODE_MR
+      - LANGUAGE_CODE_MS
+      - LANGUAGE_CODE_MT
+      - LANGUAGE_CODE_MY
+      - LANGUAGE_CODE_NA
+      - LANGUAGE_CODE_NB
+      - LANGUAGE_CODE_ND
+      - LANGUAGE_CODE_NE
+      - LANGUAGE_CODE_NG
+      - LANGUAGE_CODE_NL
+      - LANGUAGE_CODE_NN
+      - LANGUAGE_CODE_NO
+      - LANGUAGE_CODE_NR
+      - LANGUAGE_CODE_NV
+      - LANGUAGE_CODE_NY
+      - LANGUAGE_CODE_OC
+      - LANGUAGE_CODE_OJ
+      - LANGUAGE_CODE_OM
+      - LANGUAGE_CODE_OR
+      - LANGUAGE_CODE_OS
+      - LANGUAGE_CODE_PA
+      - LANGUAGE_CODE_PI
+      - LANGUAGE_CODE_PL
+      - LANGUAGE_CODE_PS
+      - LANGUAGE_CODE_PT
+      - LANGUAGE_CODE_QU
+      - LANGUAGE_CODE_RM
+      - LANGUAGE_CODE_RN
+      - LANGUAGE_CODE_RO
+      - LANGUAGE_CODE_RU
+      - LANGUAGE_CODE_RW
+      - LANGUAGE_CODE_SA
+      - LANGUAGE_CODE_SC
+      - LANGUAGE_CODE_SD
+      - LANGUAGE_CODE_SE
+      - LANGUAGE_CODE_SG
+      - LANGUAGE_CODE_SI
+      - LANGUAGE_CODE_SK
+      - LANGUAGE_CODE_SL
+      - LANGUAGE_CODE_SM
+      - LANGUAGE_CODE_SN
+      - LANGUAGE_CODE_SO
+      - LANGUAGE_CODE_SQ
+      - LANGUAGE_CODE_SR
+      - LANGUAGE_CODE_SS
+      - LANGUAGE_CODE_ST
+      - LANGUAGE_CODE_SU
+      - LANGUAGE_CODE_SV
+      - LANGUAGE_CODE_SW
+      - LANGUAGE_CODE_TA
+      - LANGUAGE_CODE_TE
+      - LANGUAGE_CODE_TG
+      - LANGUAGE_CODE_TH
+      - LANGUAGE_CODE_TI
+      - LANGUAGE_CODE_TK
+      - LANGUAGE_CODE_TL
+      - LANGUAGE_CODE_TN
+      - LANGUAGE_CODE_TO
+      - LANGUAGE_CODE_TR
+      - LANGUAGE_CODE_TS
+      - LANGUAGE_CODE_TT
+      - LANGUAGE_CODE_TW
+      - LANGUAGE_CODE_TY
+      - LANGUAGE_CODE_UG
+      - LANGUAGE_CODE_UK
+      - LANGUAGE_CODE_UR
+      - LANGUAGE_CODE_UZ
+      - LANGUAGE_CODE_VE
+      - LANGUAGE_CODE_VI
+      - LANGUAGE_CODE_VO
+      - LANGUAGE_CODE_WA
+      - LANGUAGE_CODE_WO
+      - LANGUAGE_CODE_XH
+      - LANGUAGE_CODE_YI
+      - LANGUAGE_CODE_YO
+      - LANGUAGE_CODE_ZA
+      - LANGUAGE_CODE_ZH
+      - LANGUAGE_CODE_ZU
+      title: |-
+        - LANGUAGE_CODE_AA: Afar
+         - LANGUAGE_CODE_AB: Abkhazian
+         - LANGUAGE_CODE_AE: Avestan
+         - LANGUAGE_CODE_AF: Afrikaans
+         - LANGUAGE_CODE_AK: Akan
+         - LANGUAGE_CODE_AM: Amharic
+         - LANGUAGE_CODE_AN: Aragonese
+         - LANGUAGE_CODE_AR: Arabic
+         - LANGUAGE_CODE_AS: Assamese
+         - LANGUAGE_CODE_AV: Avaric
+         - LANGUAGE_CODE_AY: Aymara
+         - LANGUAGE_CODE_AZ: Azerbaijani
+         - LANGUAGE_CODE_BA: Bashkiri
+         - LANGUAGE_CODE_BE: Belarusian
+         - LANGUAGE_CODE_BG: Bulgarian
+         - LANGUAGE_CODE_BH: Bihari languages
+         - LANGUAGE_CODE_BM: Bambara
+         - LANGUAGE_CODE_BI: Bislama
+         - LANGUAGE_CODE_BN: Bengaliguages
+         - LANGUAGE_CODE_BO: Tibetan
+         - LANGUAGE_CODE_BR: Bretonrwegian; Norwegian Bokmål
+         - LANGUAGE_CODE_BS: Bosnian
+         - LANGUAGE_CODE_CA: Catalan; Valencian
+         - LANGUAGE_CODE_CE: Chechen
+         - LANGUAGE_CODE_CH: Chamorro
+         - LANGUAGE_CODE_CO: Corsicanalencian
+         - LANGUAGE_CODE_CR: Creemer
+         - LANGUAGE_CODE_CS: Czech
+         - LANGUAGE_CODE_CU: Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic
+         - LANGUAGE_CODE_CV: ChuvashChewa; Nyanja
+         - LANGUAGE_CODE_CY: Welsh
+         - LANGUAGE_CODE_DA: Danishvic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic
+         - LANGUAGE_CODE_DE: German
+         - LANGUAGE_CODE_DV: Divehi; Dhivehi; Maldivian
+         - LANGUAGE_CODE_DZ: Dzongkha
+         - LANGUAGE_CODE_EE: Ewe
+         - LANGUAGE_CODE_EL: Greek, Modern (1453-)
+         - LANGUAGE_CODE_EN: English
+         - LANGUAGE_CODE_EO: Esperanto
+         - LANGUAGE_CODE_ES: Spanish; Castilianivehi; Maldivian
+         - LANGUAGE_CODE_ET: Estonianmish
+         - LANGUAGE_CODE_EU: Basque
+         - LANGUAGE_CODE_FA: Persian
+         - LANGUAGE_CODE_FF: Fulah
+         - LANGUAGE_CODE_FI: Finnish
+         - LANGUAGE_CODE_FJ: Fijian
+         - LANGUAGE_CODE_FO: Faroese
+         - LANGUAGE_CODE_FR: French
+         - LANGUAGE_CODE_FY: Western Frisian
+         - LANGUAGE_CODE_GA: Irish
+         - LANGUAGE_CODE_GD: Gaelic; Scottish Gaelic
+         - LANGUAGE_CODE_GL: Galicianottish Gaelic
+         - LANGUAGE_CODE_GN: Guarani
+         - LANGUAGE_CODE_GU: Gujarati
+         - LANGUAGE_CODE_GV: Manx
+         - LANGUAGE_CODE_HA: Hausa
+         - LANGUAGE_CODE_HE: Hebrewern (1453-)
+         - LANGUAGE_CODE_HI: Hindi
+         - LANGUAGE_CODE_HO: Hiri Motu
+         - LANGUAGE_CODE_HR: Croatianaitian Creole
+         - LANGUAGE_CODE_HT: Haitian; Haitian Creole
+         - LANGUAGE_CODE_HU: Hungarian
+         - LANGUAGE_CODE_HY: Armenian
+         - LANGUAGE_CODE_HZ: Herero
+         - LANGUAGE_CODE_IA: Interlingua (International Auxiliary Language Association)
+         - LANGUAGE_CODE_ID: Indonesian
+         - LANGUAGE_CODE_IE: Interlingue; Occidental
+         - LANGUAGE_CODE_IG: Igbo
+         - LANGUAGE_CODE_II: Sichuan Yi; Nuosu
+         - LANGUAGE_CODE_IK: Inupiaq
+         - LANGUAGE_CODE_IO: Idoa (International Auxiliary Language Association)
+         - LANGUAGE_CODE_IS: Icelandice; Occidental
+         - LANGUAGE_CODE_IT: Italian
+         - LANGUAGE_CODE_IU: Inuktitut
+         - LANGUAGE_CODE_JA: Japanese
+         - LANGUAGE_CODE_JV: Javanese
+         - LANGUAGE_CODE_KA: Georgian
+         - LANGUAGE_CODE_KG: Kongo
+         - LANGUAGE_CODE_KI: Kikuyu; Gikuyut; Greenlandic
+         - LANGUAGE_CODE_KJ: Kuanyama; Kwanyama
+         - LANGUAGE_CODE_KK: Kazakh
+         - LANGUAGE_CODE_KL: Kalaallisut; Greenlandic
+         - LANGUAGE_CODE_KM: Central Khmer
+         - LANGUAGE_CODE_KN: Kannadakuyu
+         - LANGUAGE_CODE_KO: Koreana
+         - LANGUAGE_CODE_KR: Kanuriyrgyz
+         - LANGUAGE_CODE_KS: Kashmiri
+         - LANGUAGE_CODE_KU: Kurdish
+         - LANGUAGE_CODE_KV: Komi
+         - LANGUAGE_CODE_KW: CornishKwanyama
+         - LANGUAGE_CODE_KY: Kirghiz; Kyrgyz
+         - LANGUAGE_CODE_LA: Latin
+         - LANGUAGE_CODE_LB: Luxembourgish; Letzeburgesch
+         - LANGUAGE_CODE_LG: Ganda
+         - LANGUAGE_CODE_LI: Limburgan; Limburger; Limburgish Limburger; Limburgish
+         - LANGUAGE_CODE_LN: Lingala
+         - LANGUAGE_CODE_LO: Lao
+         - LANGUAGE_CODE_LT: Lithuanianga
+         - LANGUAGE_CODE_LU: Luba-Katangaish; Letzeburgesch
+         - LANGUAGE_CODE_LV: Latvian
+         - LANGUAGE_CODE_MG: Malagasy
+         - LANGUAGE_CODE_MH: Marshallese
+         - LANGUAGE_CODE_MI: Maori
+         - LANGUAGE_CODE_MK: Macedonian
+         - LANGUAGE_CODE_ML: Malayalam
+         - LANGUAGE_CODE_MN: Mongolian
+         - LANGUAGE_CODE_MR: Marathi
+         - LANGUAGE_CODE_MS: Malaye
+         - LANGUAGE_CODE_MT: Maltese
+         - LANGUAGE_CODE_MY: Burmese
+         - LANGUAGE_CODE_NA: Nauruvaho
+         - LANGUAGE_CODE_NB: Bokmål, Norwegian; Norwegian Bokmålorth; North Ndebele
+         - LANGUAGE_CODE_ND: Ndebele, North; North Ndebeleouth; South Ndebele
+         - LANGUAGE_CODE_NE: Nepali
+         - LANGUAGE_CODE_NG: Ndonga
+         - LANGUAGE_CODE_NL: Dutch; Flemishami
+         - LANGUAGE_CODE_NN: Norwegian Nynorsk; Nynorsk, Norwegian
+         - LANGUAGE_CODE_NO: NorwegianNynorsk; Nynorsk, Norwegian
+         - LANGUAGE_CODE_NR: Ndebele, South; South Ndebeleost 1500)
+         - LANGUAGE_CODE_NV: Navajo; Navaho
+         - LANGUAGE_CODE_NY: Chichewa; Chewa; Nyanja
+         - LANGUAGE_CODE_OC: Occitan (post 1500)
+         - LANGUAGE_CODE_OJ: OjibwaOssetic
+         - LANGUAGE_CODE_OM: Oromo
+         - LANGUAGE_CODE_OR: Oriyaunjabi
+         - LANGUAGE_CODE_OS: Ossetian; Ossetic
+         - LANGUAGE_CODE_PA: Panjabi; Punjabi
+         - LANGUAGE_CODE_PI: Pali
+         - LANGUAGE_CODE_PL: Polishshto
+         - LANGUAGE_CODE_PS: Pushto; Pashto
+         - LANGUAGE_CODE_PT: PortugueseMoldavian; Moldovan
+         - LANGUAGE_CODE_QU: Quechua
+         - LANGUAGE_CODE_RM: Romansh
+         - LANGUAGE_CODE_RN: Rundi
+         - LANGUAGE_CODE_RO: Romanian; Moldavian; Moldovan
+         - LANGUAGE_CODE_RU: Russian
+         - LANGUAGE_CODE_RW: Kinyarwanda
+         - LANGUAGE_CODE_SA: Sanskrit
+         - LANGUAGE_CODE_SC: Sardinian
+         - LANGUAGE_CODE_SD: Sindhi
+         - LANGUAGE_CODE_SE: Northern Sami; Nuosu
+         - LANGUAGE_CODE_SG: Sango
+         - LANGUAGE_CODE_SI: Sinhala; Sinhaleseinhalese
+         - LANGUAGE_CODE_SK: Slovak
+         - LANGUAGE_CODE_SL: Slovenian
+         - LANGUAGE_CODE_SM: Samoan
+         - LANGUAGE_CODE_SN: Shonathern
+         - LANGUAGE_CODE_SO: Somaliastilian
+         - LANGUAGE_CODE_SQ: Albanian
+         - LANGUAGE_CODE_SR: Serbian
+         - LANGUAGE_CODE_SS: Swati
+         - LANGUAGE_CODE_ST: Sotho, Southern
+         - LANGUAGE_CODE_SU: Sundanese
+         - LANGUAGE_CODE_SV: Swedish
+         - LANGUAGE_CODE_SW: Swahili
+         - LANGUAGE_CODE_TA: Tamil
+         - LANGUAGE_CODE_TE: Telugu
+         - LANGUAGE_CODE_TG: Tajik
+         - LANGUAGE_CODE_TH: Thai
+         - LANGUAGE_CODE_TI: Tigrinya
+         - LANGUAGE_CODE_TK: Turkmen
+         - LANGUAGE_CODE_TL: Tagalogga Islands)
+         - LANGUAGE_CODE_TN: Tswana
+         - LANGUAGE_CODE_TO: Tonga (Tonga Islands)
+         - LANGUAGE_CODE_TR: Turkish
+         - LANGUAGE_CODE_TS: Tsonga
+         - LANGUAGE_CODE_TT: Tatar
+         - LANGUAGE_CODE_TW: Twighur
+         - LANGUAGE_CODE_TY: Tahitian
+         - LANGUAGE_CODE_UG: Uighur; Uyghur
+         - LANGUAGE_CODE_UK: Ukrainian
+         - LANGUAGE_CODE_UR: Urdu
+         - LANGUAGE_CODE_UZ: Uzbek
+         - LANGUAGE_CODE_VE: Venda
+         - LANGUAGE_CODE_VI: Vietnamese
+         - LANGUAGE_CODE_VO: Volapük
+         - LANGUAGE_CODE_WA: Walloonisian
+         - LANGUAGE_CODE_WO: Wolof
+         - LANGUAGE_CODE_XH: Xhosa
+         - LANGUAGE_CODE_YI: Yiddish
+         - LANGUAGE_CODE_YO: Yoruba
+         - LANGUAGE_CODE_ZA: Zhuang; Chuanguang
+         - LANGUAGE_CODE_ZH: Chinese
+         - LANGUAGE_CODE_ZU: Zulu
+      type: string
     productListProductsByIdsRequest:
       properties:
         tenantId:
@@ -3065,7 +4642,8 @@ components:
     productListProductsByIdsResponse:
       example:
         products:
-        - grn: grn
+        - inReview: true
+          grn: grn
           entityCode: entityCode
           code: code
           variantAttributes:
@@ -3178,7 +4756,8 @@ components:
           - mediaVariantAttributes
           - mediaVariantAttributes
           updatedAt: updatedAt
-        - grn: grn
+        - inReview: true
+          grn: grn
           entityCode: entityCode
           code: code
           variantAttributes:
@@ -3307,7 +4886,8 @@ components:
     productListProductsBySkuResponse:
       example:
         products:
-        - grn: grn
+        - inReview: true
+          grn: grn
           entityCode: entityCode
           code: code
           variantAttributes:
@@ -3420,7 +5000,8 @@ components:
           - mediaVariantAttributes
           - mediaVariantAttributes
           updatedAt: updatedAt
-        - grn: grn
+        - inReview: true
+          grn: grn
           entityCode: entityCode
           code: code
           variantAttributes:
@@ -3557,7 +5138,8 @@ components:
       example:
         nextPageToken: nextPageToken
         products:
-        - grn: grn
+        - inReview: true
+          grn: grn
           entityCode: entityCode
           code: code
           variantAttributes:
@@ -3670,7 +5252,8 @@ components:
           - mediaVariantAttributes
           - mediaVariantAttributes
           updatedAt: updatedAt
-        - grn: grn
+        - inReview: true
+          grn: grn
           entityCode: entityCode
           code: code
           variantAttributes:
@@ -3929,6 +5512,7 @@ components:
       type: object
     productProductEntity:
       example:
+        inReview: true
         grn: grn
         entityCode: entityCode
         code: code
@@ -4089,6 +5673,8 @@ components:
           type: integer
         assets:
           $ref: '#/components/schemas/productAssets'
+        inReview:
+          type: boolean
         createdAt:
           format: int64
           type: string
@@ -4139,6 +5725,17 @@ components:
       type: object
     productRemoveMediaGalleryEntryResponse:
       type: object
+    productTranslateAction:
+      properties:
+        all:
+          type: object
+        attributeCodes:
+          $ref: '#/components/schemas/TranslateActionAttributeCodesToTranslate'
+        sourceLanguage:
+          $ref: '#/components/schemas/productLanguageCode'
+        targetLanguage:
+          $ref: '#/components/schemas/productLanguageCode'
+      type: object
     productUpdateAssetEntryPayload:
       properties:
         assetGrn:
@@ -4152,6 +5749,19 @@ components:
           items:
             $ref: '#/components/schemas/productAssetsEntryMetadata'
           type: array
+      type: object
+    productUpdateDataToBeReviewedRequest:
+      properties:
+        tenantId:
+          type: string
+        productId:
+          type: string
+        payload:
+          $ref: '#/components/schemas/productDataInReview'
+        payloadMask:
+          type: string
+      type: object
+    productUpdateDataToBeReviewedResponse:
       type: object
     productUpdateMediaGalleryEntryRequest:
       properties:
@@ -4200,6 +5810,8 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/productProductVariant'
           type: object
+        inReview:
+          type: boolean
       type: object
     productUpdateProductRequestV2:
       properties:
@@ -4228,6 +5840,8 @@ components:
           items:
             type: string
           type: array
+        inReview:
+          type: boolean
       type: object
     productUpdateProductResponse:
       example:
@@ -4257,6 +5871,28 @@ components:
           type: array
       type: object
     productUpdateProductResponseV2:
+      type: object
+    productUpdateProductWithAIRequest:
+      properties:
+        tenantId:
+          type: string
+        id:
+          type: string
+        locale:
+          type: string
+        skipReview:
+          type: boolean
+        attributesToEnrich:
+          items:
+            $ref: '#/components/schemas/productAttributeToEnrich'
+          type: array
+      type: object
+    productUpdateProductWithAIResponse:
+      example:
+        id: id
+      properties:
+        id:
+          type: string
       type: object
     productentitymanagerLocalizedText:
       example:
@@ -4401,6 +6037,10 @@ components:
           type: array
       type: object
   securitySchemes:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey
     standardAuthorization:
       flows:
         implicit:

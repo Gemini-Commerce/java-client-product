@@ -1,6 +1,6 @@
 /*
  * Product Service
- * API for managing products
+ * Introducing our revolutionary Product Management Service! Designed to streamline your product inventory and elevate customer experiences, our cutting-edge protobuf service is a game-changer in the world of efficient product management.  With our service, you can effortlessly create new products, allowing you to quickly bring your ideas to life and expand your catalog. Retrieve product information in a snap, providing accurate and personalized details to your customers based on their specific needs and preferences.  Stay ahead of the competition by easily updating product information, ensuring your catalog is always up-to-date and optimized. Seamlessly remove products from your inventory when needed, maintaining a clean and relevant product selection.  Enhance the visual appeal of your products with our advanced media gallery functionalities. Effortlessly add and update captivating images and videos to showcase your products in the best possible light, engaging your customers and driving conversions.  Personalization is key in today's market, and our service enables you to offer unique options to your customers. Easily create and manage lists of customizable options for your products, providing flexibility and tailoring to individual preferences.  Attributes play a vital role in defining products, and our service empowers you to effectively manage them. From bulk attribute creation to listing and retrieving attribute options, our service ensures your product information is rich and comprehensive.  Our service extends its capabilities to entity management, allowing you to effortlessly handle different entities and create customized options lists associated with them. This provides further flexibility and customization options for your product offerings.  When it comes to bulk updates, our service has you covered. Effortlessly update multiple products simultaneously, saving you time and streamlining your operations.  Finding specific products and variants is a breeze with our service. Quickly locate products based on their unique stock keeping unit (SKU) values, ensuring efficient inventory management and smooth order fulfillment.  Experience a new level of efficiency and productivity with our Product Management Service. Unlock the full potential of streamlined product management and empower your business to thrive in today's competitive market. Try our service today and elevate your product management to new heights!
  *
  * The version of the OpenAPI document: v1
  * Contact: info@gemini-commerce.com
@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.openapitools.client.model.EntitymanagerAiContext;
 import org.openapitools.client.model.EntitymanagerRenderAs;
 
 import com.google.gson.Gson;
@@ -52,7 +53,7 @@ import GeminiCommerce_Product.JSON;
 /**
  * EntitymanagerUpdateAttributeRequestPayload
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-29T10:49:30.026307733Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-06T13:40:57.069678376Z[Etc/UTC]")
 public class EntitymanagerUpdateAttributeRequestPayload {
   public static final String SERIALIZED_NAME_LABEL = "label";
   @SerializedName(SERIALIZED_NAME_LABEL)
@@ -77,6 +78,10 @@ public class EntitymanagerUpdateAttributeRequestPayload {
   public static final String SERIALIZED_NAME_RENDER_AS = "renderAs";
   @SerializedName(SERIALIZED_NAME_RENDER_AS)
   private EntitymanagerRenderAs renderAs = EntitymanagerRenderAs.DEFAULT;
+
+  public static final String SERIALIZED_NAME_AI_CONTEXT = "aiContext";
+  @SerializedName(SERIALIZED_NAME_AI_CONTEXT)
+  private EntitymanagerAiContext aiContext;
 
   public EntitymanagerUpdateAttributeRequestPayload() {
   }
@@ -203,6 +208,25 @@ public class EntitymanagerUpdateAttributeRequestPayload {
   }
 
 
+  public EntitymanagerUpdateAttributeRequestPayload aiContext(EntitymanagerAiContext aiContext) {
+    this.aiContext = aiContext;
+    return this;
+  }
+
+   /**
+   * Get aiContext
+   * @return aiContext
+  **/
+  @javax.annotation.Nullable
+  public EntitymanagerAiContext getAiContext() {
+    return aiContext;
+  }
+
+  public void setAiContext(EntitymanagerAiContext aiContext) {
+    this.aiContext = aiContext;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -218,12 +242,13 @@ public class EntitymanagerUpdateAttributeRequestPayload {
         Objects.equals(this.sort, entitymanagerUpdateAttributeRequestPayload.sort) &&
         Objects.equals(this.groupCode, entitymanagerUpdateAttributeRequestPayload.groupCode) &&
         Objects.equals(this.title, entitymanagerUpdateAttributeRequestPayload.title) &&
-        Objects.equals(this.renderAs, entitymanagerUpdateAttributeRequestPayload.renderAs);
+        Objects.equals(this.renderAs, entitymanagerUpdateAttributeRequestPayload.renderAs) &&
+        Objects.equals(this.aiContext, entitymanagerUpdateAttributeRequestPayload.aiContext);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, _default, sort, groupCode, title, renderAs);
+    return Objects.hash(label, _default, sort, groupCode, title, renderAs, aiContext);
   }
 
   @Override
@@ -236,6 +261,7 @@ public class EntitymanagerUpdateAttributeRequestPayload {
     sb.append("    groupCode: ").append(toIndentedString(groupCode)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    renderAs: ").append(toIndentedString(renderAs)).append("\n");
+    sb.append("    aiContext: ").append(toIndentedString(aiContext)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -264,6 +290,7 @@ public class EntitymanagerUpdateAttributeRequestPayload {
     openapiFields.add("groupCode");
     openapiFields.add("title");
     openapiFields.add("renderAs");
+    openapiFields.add("aiContext");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -302,6 +329,10 @@ public class EntitymanagerUpdateAttributeRequestPayload {
       // validate the optional field `renderAs`
       if (jsonObj.get("renderAs") != null && !jsonObj.get("renderAs").isJsonNull()) {
         EntitymanagerRenderAs.validateJsonElement(jsonObj.get("renderAs"));
+      }
+      // validate the optional field `aiContext`
+      if (jsonObj.get("aiContext") != null && !jsonObj.get("aiContext").isJsonNull()) {
+        EntitymanagerAiContext.validateJsonElement(jsonObj.get("aiContext"));
       }
   }
 

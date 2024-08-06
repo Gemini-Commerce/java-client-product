@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **mediaVariantAttributes**| **List<String>** |   | [optional]
 **attributes**| [**Map<String, ProtobufAny>**](ProtobufAny.md) |   | [optional] [default to new HashMap<>()]
 **variants**| [**Map<String, ProductProductVariant>**](ProductProductVariant.md) |   | [optional] [default to new HashMap<>()]
+**inReview**| **Boolean** |   | [optional]
 
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
