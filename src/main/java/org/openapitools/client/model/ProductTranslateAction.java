@@ -50,7 +50,7 @@ import GeminiCommerce.Product.JSON;
 /**
  * ProductTranslateAction
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-14T11:24:03.179733008Z[Etc/UTC]", comments = "Generator version: 7.9.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-14T11:42:17.531571900Z[Etc/UTC]", comments = "Generator version: 7.9.0")
 public class ProductTranslateAction {
   public static final String SERIALIZED_NAME_ALL = "all";
   @SerializedName(SERIALIZED_NAME_ALL)

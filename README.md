@@ -2,7 +2,7 @@
 
 Product Service
 - API version: v1
-  - Build date: 2024-11-14T11:24:03.179733008Z[Etc/UTC]
+  - Build date: 2024-11-14T11:42:17.531571900Z[Etc/UTC]
   - Generator version: 7.9.0
 
 Introducing our revolutionary Product Management Service! Designed to streamline your product inventory and elevate customer experiences, our cutting-edge protobuf service is a game-changer in the world of efficient product management.

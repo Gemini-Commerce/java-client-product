@@ -55,7 +55,7 @@ import GeminiCommerce.Product.JSON;
 /**
  * The CreateProductRequest message is used to create a new product within the system. It contains various fields that allow specifying the details and attributes of the product.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-14T11:24:03.179733008Z[Etc/UTC]", comments = "Generator version: 7.9.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-14T11:42:17.531571900Z[Etc/UTC]", comments = "Generator version: 7.9.0")
 public class ProductCreateProductRequest {
   public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
