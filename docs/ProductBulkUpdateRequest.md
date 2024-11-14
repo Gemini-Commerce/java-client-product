@@ -7,7 +7,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tenantId**| **String** |   | [optional]
-**productIds**| **List<String>** |   | [optional]
+**productIds**| **List<String>** |   | [optional] [default to new ArrayList<>()]
 **payload**| [**ProductBulkUpdateRequestPayload**](ProductBulkUpdateRequestPayload.md) |   | [optional]
 
 

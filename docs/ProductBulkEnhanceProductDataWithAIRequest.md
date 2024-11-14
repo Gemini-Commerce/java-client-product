@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **tenantId**| **String** |   | [optional]
 **enrich**| [**ProductEnrichAction**](ProductEnrichAction.md) |   | [optional]
 **translate**| [**ProductTranslateAction**](ProductTranslateAction.md) |   | [optional]
-**productIds**| **List<String>** |   | [optional]
+**productIds**| **List<String>** |   | [optional] [default to new ArrayList<>()]
 **skipReview**| **Boolean** |   | [optional]
 
 

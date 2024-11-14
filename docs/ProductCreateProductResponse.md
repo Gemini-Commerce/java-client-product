@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success**| **Boolean** | Indicates whether the product creation was successful or not.  | [optional]
 **id**| **String** | Represents the ID of the created product.  | [optional]
-**productErrors**| [**List<ProductProductResponseError>**](ProductProductResponseError.md) | Contains a list of ProductResponseError messages, indicating any errors related to the product creation.  | [optional]
-**attributeErrors**| [**List<ProductAttributeResponseError>**](ProductAttributeResponseError.md) | Contains a list of AttributeResponseError messages, indicating any errors related to the attributes of the product.  | [optional]
+**productErrors**| [**List<ProductProductResponseError>**](ProductProductResponseError.md) | Contains a list of ProductResponseError messages, indicating any errors related to the product creation.  | [optional] [default to new ArrayList<>()]
+**attributeErrors**| [**List<ProductAttributeResponseError>**](ProductAttributeResponseError.md) | Contains a list of AttributeResponseError messages, indicating any errors related to the attributes of the product.  | [optional] [default to new ArrayList<>()]
 
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

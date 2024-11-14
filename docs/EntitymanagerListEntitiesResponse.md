@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entities**| [**List<EntitymanagerEntity>**](EntitymanagerEntity.md) |   | [optional]
+**entities**| [**List<EntitymanagerEntity>**](EntitymanagerEntity.md) |   | [optional] [default to new ArrayList<>()]
 **nextPage**| **Integer** |   | [optional]
 
 

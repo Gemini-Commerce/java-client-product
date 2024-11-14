@@ -64,11 +64,11 @@ The AddMediaGalleryEntry endpoint allows users to add a new media entry to the g
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -136,11 +136,11 @@ The BulkAddAssetsEntries endpoint allows users to add assets. This operation is 
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -208,11 +208,11 @@ This operation is asynchronous and may complete after the response.
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -280,11 +280,11 @@ The BulkEnhanceProductDataWithAI endpoint allows users to enhance product data u
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -352,11 +352,11 @@ The BulkRemoveAssetsEntries endpoint allows users to remove assets. This operati
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -424,11 +424,11 @@ The BulkUpdateAssetsEntries endpoint allows users to update assets. This operati
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -496,11 +496,11 @@ Version 2 of bulk updates for product attributes with enhanced payload structure
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -568,11 +568,11 @@ Create attribute options with specified codes, values, and swatches. Returns cre
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -640,11 +640,11 @@ The CreateEntity endpoint allows users to define and create a new entity with cu
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -711,11 +711,11 @@ The CreateOptionsList endpoint allows users to create an OptionList, which repre
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -783,11 +783,11 @@ The CreateProductWithAI endpoint allows users to create a new product within the
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -855,11 +855,11 @@ Retrieve attribute option details by providing the tenant ID, list code, and opt
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -927,11 +927,11 @@ Retrieve a list of attribute options based on the provided tenant ID and list co
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -999,11 +999,11 @@ Retrieve details of an entity by providing the tenant ID and either entity data 
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1071,11 +1071,11 @@ Retrieve option lists.
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1143,11 +1143,11 @@ The GetProduct endpoint enables users to retrieve a product from the system. By 
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1215,11 +1215,11 @@ The GetProductByCode endpoint enables users to retrieve a product from the syste
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1287,11 +1287,11 @@ The GetProductByUrlKey endpoint enables users to retrieve a product from the sys
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1359,11 +1359,11 @@ The GetProductDataInReview endpoint allows users to retrieve product data that i
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1429,11 +1429,11 @@ List Attribute Options
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1499,11 +1499,11 @@ List Entities
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1571,11 +1571,11 @@ The ListOptionsLists endpoint allows users to retrieve a list of OptionLists ava
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1643,11 +1643,11 @@ The ListProducts endpoint provides users with the ability to retrieve a filtered
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1715,11 +1715,11 @@ The ListProductsByIds endpoint allows users to retrieve a list of products based
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1785,11 +1785,11 @@ List Products By Sku
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1855,11 +1855,11 @@ List Product Variants By Sku
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1927,11 +1927,11 @@ Allow creation of multiple attributes. If any attribute is invalid, an error wil
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -1997,11 +1997,11 @@ This operation is asynchronous and may complete after the response.
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2065,11 +2065,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2133,11 +2133,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2201,11 +2201,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2269,11 +2269,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2337,11 +2337,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2405,11 +2405,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2473,11 +2473,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2541,11 +2541,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2609,11 +2609,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2677,11 +2677,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2745,11 +2745,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2813,11 +2813,11 @@ public class Example {
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2883,11 +2883,11 @@ The RemoveMediaGalleryEntry endpoint allows users to remove a specific media ent
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -2953,11 +2953,11 @@ Update Attribute Options
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -3025,11 +3025,11 @@ The GetEnhanceProductDataWithAIStatus endpoint allows users to retrieve the stat
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -3097,11 +3097,11 @@ The UpdateDataToBeReviewed endpoint allows users to update product data that is 
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -3169,11 +3169,11 @@ The UpdateMediaGalleryEntry endpoint allows users to modify and update a specifi
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -3239,11 +3239,11 @@ Update Options List
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {
@@ -3311,11 +3311,11 @@ The UpdateProductWithAI endpoint allows users to update an existing product with
 ### Example
 ```java
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import GeminiCommerce.Product.models.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {

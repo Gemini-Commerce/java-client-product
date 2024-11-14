@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **code**| **String** |   | [optional]
 **parentCode**| **String** |   | [optional]
 **label**| **String** |   | [optional]
-**relationships**| **List<String>** |   | [optional]
-**attributes**| [**List<EntitymanagerAttribute>**](EntitymanagerAttribute.md) |   | [optional]
+**relationships**| **List<String>** |   | [optional] [default to new ArrayList<>()]
+**attributes**| [**List<EntitymanagerAttribute>**](EntitymanagerAttribute.md) |   | [optional] [default to new ArrayList<>()]
 
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attributeWriteErrors**| [**List<EntitymanagerAttributeWriteError>**](EntitymanagerAttributeWriteError.md) |   | [optional]
+**attributeWriteErrors**| [**List<EntitymanagerAttributeWriteError>**](EntitymanagerAttributeWriteError.md) |   | [optional] [default to new ArrayList<>()]
 
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

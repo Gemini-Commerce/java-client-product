@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**roles**| **List<String>** |   | [optional]
+**roles**| **List<String>** |   | [optional] [default to new ArrayList<>()]
 **alt**| [**ProductLocalizedText**](ProductLocalizedText.md) |   | [optional]
 
 

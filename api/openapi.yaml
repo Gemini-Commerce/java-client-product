@@ -89,7 +89,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkAddAssetsEntries:
     post:
       description: The BulkAddAssetsEntries endpoint allows users to add assets. This
@@ -132,7 +133,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkCreateAttribute:
     post:
       description: "Allow creation of multiple attributes. If any attribute is invalid,\
@@ -162,7 +164,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkDeleteProducts:
     post:
       description: This operation is asynchronous and may complete after the response.
@@ -204,7 +207,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkEnhanceProductDataWithAI:
     post:
       description: "The BulkEnhanceProductDataWithAI endpoint allows users to enhance\
@@ -250,7 +254,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkRemoveAssetsEntries:
     post:
       description: The BulkRemoveAssetsEntries endpoint allows users to remove assets.
@@ -293,7 +298,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkUpdate:
     post:
       deprecated: true
@@ -322,7 +328,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkUpdateAssetsEntries:
     post:
       description: The BulkUpdateAssetsEntries endpoint allows users to update assets.
@@ -365,7 +372,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/BulkUpdateV2:
     post:
       description: Version 2 of bulk updates for product attributes with enhanced
@@ -409,7 +417,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/CreateAttributeGroup:
     post:
       operationId: Product_CreateAttributeGroup
@@ -436,7 +445,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/CreateAttributeOptions:
     post:
       description: "Create attribute options with specified codes, values, and swatches.\
@@ -479,7 +489,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/CreateEntity:
     post:
       description: "The CreateEntity endpoint allows users to define and create a\
@@ -524,7 +535,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/CreateOptionsList:
     post:
       description: "The CreateOptionsList endpoint allows users to create an OptionList,\
@@ -572,7 +584,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/CreateProduct:
     post:
       deprecated: true
@@ -603,7 +616,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/CreateProductV2:
     post:
       operationId: Product_CreateProductV2
@@ -630,7 +644,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/CreateProductWithAI:
     post:
       description: "The CreateProductWithAI endpoint allows users to create a new\
@@ -676,7 +691,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/Delete:
     post:
       deprecated: true
@@ -704,7 +720,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/DeleteAttribute:
     post:
       operationId: Product_DeleteAttribute
@@ -731,7 +748,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/DeleteProduct:
     post:
       operationId: Product_DeleteProduct
@@ -758,7 +776,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetAttributeGroup:
     post:
       operationId: Product_GetAttributeGroup
@@ -785,7 +804,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetAttributeOption:
     post:
       description: "Retrieve attribute option details by providing the tenant ID,\
@@ -828,7 +848,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetAttributeOptions:
     post:
       description: Retrieve a list of attribute options based on the provided tenant
@@ -871,7 +892,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetEnhanceProductDataWithAIStatus:
     post:
       description: "The GetEnhanceProductDataWithAIStatus endpoint allows users to\
@@ -919,7 +941,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetEntity:
     post:
       description: "Retrieve details of an entity by providing the tenant ID and either\
@@ -963,7 +986,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetOptionsList:
     post:
       description: Retrieve option lists.
@@ -1005,7 +1029,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetProduct:
     post:
       description: "The GetProduct endpoint enables users to retrieve a product from\
@@ -1049,7 +1074,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetProductByCode:
     post:
       description: "The GetProductByCode endpoint enables users to retrieve a product\
@@ -1093,7 +1119,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetProductByUrlKey:
     post:
       description: "The GetProductByUrlKey endpoint enables users to retrieve a product\
@@ -1137,7 +1164,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/GetProductDataInReview:
     post:
       description: "The GetProductDataInReview endpoint allows users to retrieve product\
@@ -1184,7 +1212,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListAttributeGroups:
     post:
       operationId: Product_ListAttributeGroups
@@ -1211,7 +1240,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListAttributeOptions:
     post:
       operationId: ListAttributeOptions
@@ -1252,7 +1282,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListEntities:
     post:
       operationId: ListEntities
@@ -1293,7 +1324,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListOptionsLists:
     post:
       description: "The ListOptionsLists endpoint allows users to retrieve a list\
@@ -1343,7 +1375,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListProducts:
     post:
       description: "The ListProducts endpoint provides users with the ability to retrieve\
@@ -1390,7 +1423,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListProductsByIds:
     post:
       description: "The ListProductsByIds endpoint allows users to retrieve a list\
@@ -1437,7 +1471,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListProductsBySku:
     post:
       operationId: ListProductsBySku
@@ -1478,7 +1513,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/ListVariantsBySku:
     post:
       operationId: ListVariantsBySku
@@ -1519,7 +1555,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/RemoveMediaGalleryEntry:
     post:
       description: "The RemoveMediaGalleryEntry endpoint allows users to remove a\
@@ -1566,7 +1603,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateAttribute:
     post:
       operationId: Product_UpdateAttribute
@@ -1593,7 +1631,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateAttributeGroup:
     post:
       operationId: Product_UpdateAttributeGroup
@@ -1620,7 +1659,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateAttributeOptions:
     post:
       operationId: UpdateAttributeOptions
@@ -1661,7 +1701,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateDataToBeReviewed:
     post:
       description: "The UpdateDataToBeReviewed endpoint allows users to update product\
@@ -1708,7 +1749,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateMediaGalleryEntry:
     post:
       description: "The UpdateMediaGalleryEntry endpoint allows users to modify and\
@@ -1754,7 +1796,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateOptionsList:
     post:
       operationId: UpdateOptionsList
@@ -1795,7 +1838,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateProduct:
     post:
       deprecated: true
@@ -1823,7 +1867,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateProductV2:
     post:
       operationId: Product_UpdateProductV2
@@ -1850,7 +1895,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
   /product.Product/UpdateProductWithAI:
     post:
       description: "The UpdateProductWithAI endpoint allows users to update an existing\
@@ -1896,7 +1942,8 @@ paths:
       - Product
       x-codegen-request-body-name: body
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
 components:
   schemas:
     AttributeInReviewString:
@@ -1920,12 +1967,12 @@ components:
       type: object
     GetEnhanceProductDataWithAIStatusResponseJob:
       example:
-        jobStatus: null
+        jobStatus: ATTRIBUTE_IN_REVIEW_STATUS_UNKNOWN
         executedAt: 2000-01-23T04:56:07.000+00:00
         productId: productId
         startedAt: 2000-01-23T04:56:07.000+00:00
         id: id
-        jobType: null
+        jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
         parentId: parentId
         finishedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -1994,12 +2041,12 @@ components:
         isRequired: true
         code: code
         optionList: optionList
-        renderAs: null
+        renderAs: DEFAULT
         entityId: entityId
         isRepeated: true
         label: label
         sort: 0
-        type: null
+        type: TEXT
         title:
           key: title
         isSystem: true
@@ -2174,12 +2221,12 @@ components:
         - isRequired: true
           code: code
           optionList: optionList
-          renderAs: null
+          renderAs: DEFAULT
           entityId: entityId
           isRepeated: true
           label: label
           sort: 0
-          type: null
+          type: TEXT
           title:
             key: title
           isSystem: true
@@ -2193,12 +2240,12 @@ components:
         - isRequired: true
           code: code
           optionList: optionList
-          renderAs: null
+          renderAs: DEFAULT
           entityId: entityId
           isRepeated: true
           label: label
           sort: 0
-          type: null
+          type: TEXT
           title:
             key: title
           isSystem: true
@@ -2303,12 +2350,12 @@ components:
           - isRequired: true
             code: code
             optionList: optionList
-            renderAs: null
+            renderAs: DEFAULT
             entityId: entityId
             isRepeated: true
             label: label
             sort: 0
-            type: null
+            type: TEXT
             title:
               key: title
             isSystem: true
@@ -2322,12 +2369,12 @@ components:
           - isRequired: true
             code: code
             optionList: optionList
-            renderAs: null
+            renderAs: DEFAULT
             entityId: entityId
             isRepeated: true
             label: label
             sort: 0
-            type: null
+            type: TEXT
             title:
               key: title
             isSystem: true
@@ -2394,12 +2441,12 @@ components:
         - isRequired: true
           code: code
           optionList: optionList
-          renderAs: null
+          renderAs: DEFAULT
           entityId: entityId
           isRepeated: true
           label: label
           sort: 0
-          type: null
+          type: TEXT
           title:
             key: title
           isSystem: true
@@ -2413,12 +2460,12 @@ components:
         - isRequired: true
           code: code
           optionList: optionList
-          renderAs: null
+          renderAs: DEFAULT
           entityId: entityId
           isRepeated: true
           label: label
           sort: 0
-          type: null
+          type: TEXT
           title:
             key: title
           isSystem: true
@@ -2693,12 +2740,12 @@ components:
           - isRequired: true
             code: code
             optionList: optionList
-            renderAs: null
+            renderAs: DEFAULT
             entityId: entityId
             isRepeated: true
             label: label
             sort: 0
-            type: null
+            type: TEXT
             title:
               key: title
             isSystem: true
@@ -2712,12 +2759,12 @@ components:
           - isRequired: true
             code: code
             optionList: optionList
-            renderAs: null
+            renderAs: DEFAULT
             entityId: entityId
             isRepeated: true
             label: label
             sort: 0
-            type: null
+            type: TEXT
             title:
               key: title
             isSystem: true
@@ -2741,12 +2788,12 @@ components:
           - isRequired: true
             code: code
             optionList: optionList
-            renderAs: null
+            renderAs: DEFAULT
             entityId: entityId
             isRepeated: true
             label: label
             sort: 0
-            type: null
+            type: TEXT
             title:
               key: title
             isSystem: true
@@ -2760,12 +2807,12 @@ components:
           - isRequired: true
             code: code
             optionList: optionList
-            renderAs: null
+            renderAs: DEFAULT
             entityId: entityId
             isRepeated: true
             label: label
             sort: 0
-            type: null
+            type: TEXT
             title:
               key: title
             isSystem: true
@@ -3145,8 +3192,8 @@ components:
         int64: int64
         float32: 6.0274563
         float64: 1.4658129805029452
-        source: null
-        jobType: null
+        source: ATTRIBUTE_IN_REVIEW_SOURCE_UNKNOWN
+        jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
         error:
           reason: reason
           code: code
@@ -3729,8 +3776,8 @@ components:
           int64: int64
           float32: 6.0274563
           float64: 1.4658129805029452
-          source: null
-          jobType: null
+          source: ATTRIBUTE_IN_REVIEW_SOURCE_UNKNOWN
+          jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
           error:
             reason: reason
             code: code
@@ -3745,8 +3792,8 @@ components:
           int64: int64
           float32: 6.0274563
           float64: 1.4658129805029452
-          source: null
-          jobType: null
+          source: ATTRIBUTE_IN_REVIEW_SOURCE_UNKNOWN
+          jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
           error:
             reason: reason
             code: code
@@ -3801,20 +3848,20 @@ components:
     productGetEnhanceProductDataWithAIStatusResponse:
       example:
         jobs:
-        - jobStatus: null
+        - jobStatus: ATTRIBUTE_IN_REVIEW_STATUS_UNKNOWN
           executedAt: 2000-01-23T04:56:07.000+00:00
           productId: productId
           startedAt: 2000-01-23T04:56:07.000+00:00
           id: id
-          jobType: null
+          jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
           parentId: parentId
           finishedAt: 2000-01-23T04:56:07.000+00:00
-        - jobStatus: null
+        - jobStatus: ATTRIBUTE_IN_REVIEW_STATUS_UNKNOWN
           executedAt: 2000-01-23T04:56:07.000+00:00
           productId: productId
           startedAt: 2000-01-23T04:56:07.000+00:00
           id: id
-          jobType: null
+          jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
           parentId: parentId
           finishedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -4103,8 +4150,8 @@ components:
             int64: int64
             float32: 6.0274563
             float64: 1.4658129805029452
-            source: null
-            jobType: null
+            source: ATTRIBUTE_IN_REVIEW_SOURCE_UNKNOWN
+            jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
             error:
               reason: reason
               code: code
@@ -4119,8 +4166,8 @@ components:
             int64: int64
             float32: 6.0274563
             float64: 1.4658129805029452
-            source: null
-            jobType: null
+            source: ATTRIBUTE_IN_REVIEW_SOURCE_UNKNOWN
+            jobType: ATTRIBUTE_IN_REVIEW_JOB_TYPE_UNKNOWN
             error:
               reason: reason
               code: code
@@ -6025,6 +6072,12 @@ components:
           type: string
       type: object
     rpcStatus:
+      example:
+        code: 6
+        details:
+        - '@type': '@type'
+        - '@type': '@type'
+        message: message
       properties:
         code:
           format: int32

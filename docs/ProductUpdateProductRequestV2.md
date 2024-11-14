@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **maxSaleableQuantity**| **Long** |   | [optional]
 **attributes**| [**Map<String, ProtobufAny>**](ProtobufAny.md) |   | [optional] [default to new HashMap<>()]
 **variants**| [**Map<String, ProductProductVariant>**](ProductProductVariant.md) |   | [optional] [default to new HashMap<>()]
-**mediaVariantAttributes**| **List<String>** |   | [optional]
+**mediaVariantAttributes**| **List<String>** |   | [optional] [default to new ArrayList<>()]
 **inReview**| **Boolean** |   | [optional]
 
 

@@ -40,19 +40,18 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import GeminiCommerce_Product.JSON;
+import GeminiCommerce.Product.JSON;
 
 /**
  * ProductBulkAddAssetsEntriesRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-06T13:40:57.069678376Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-14T11:24:03.179733008Z[Etc/UTC]", comments = "Generator version: 7.9.0")
 public class ProductBulkAddAssetsEntriesRequest {
   public static final String SERIALIZED_NAME_TENANT_ID = "tenantId";
   @SerializedName(SERIALIZED_NAME_TENANT_ID)
@@ -64,7 +63,7 @@ public class ProductBulkAddAssetsEntriesRequest {
 
   public static final String SERIALIZED_NAME_ASSETS = "assets";
   @SerializedName(SERIALIZED_NAME_ASSETS)
-  private List<ProductAssetData> assets;
+  private List<ProductAssetData> assets = new ArrayList<>();
 
   public ProductBulkAddAssetsEntriesRequest() {
   }
@@ -74,10 +73,10 @@ public class ProductBulkAddAssetsEntriesRequest {
     return this;
   }
 
-   /**
+  /**
    * Get tenantId
    * @return tenantId
-  **/
+   */
   @javax.annotation.Nullable
   public String getTenantId() {
     return tenantId;
@@ -93,10 +92,10 @@ public class ProductBulkAddAssetsEntriesRequest {
     return this;
   }
 
-   /**
+  /**
    * Get productId
    * @return productId
-  **/
+   */
   @javax.annotation.Nullable
   public String getProductId() {
     return productId;
@@ -120,10 +119,10 @@ public class ProductBulkAddAssetsEntriesRequest {
     return this;
   }
 
-   /**
+  /**
    * Get assets
    * @return assets
-  **/
+   */
   @javax.annotation.Nullable
   public List<ProductAssetData> getAssets() {
     return assets;
@@ -133,6 +132,50 @@ public class ProductBulkAddAssetsEntriesRequest {
     this.assets = assets;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the ProductBulkAddAssetsEntriesRequest instance itself
+   */
+  public ProductBulkAddAssetsEntriesRequest putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -146,12 +189,13 @@ public class ProductBulkAddAssetsEntriesRequest {
     ProductBulkAddAssetsEntriesRequest productBulkAddAssetsEntriesRequest = (ProductBulkAddAssetsEntriesRequest) o;
     return Objects.equals(this.tenantId, productBulkAddAssetsEntriesRequest.tenantId) &&
         Objects.equals(this.productId, productBulkAddAssetsEntriesRequest.productId) &&
-        Objects.equals(this.assets, productBulkAddAssetsEntriesRequest.assets);
+        Objects.equals(this.assets, productBulkAddAssetsEntriesRequest.assets)&&
+        Objects.equals(this.additionalProperties, productBulkAddAssetsEntriesRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tenantId, productId, assets);
+    return Objects.hash(tenantId, productId, assets, additionalProperties);
   }
 
   @Override
@@ -161,6 +205,7 @@ public class ProductBulkAddAssetsEntriesRequest {
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    productId: ").append(toIndentedString(productId)).append("\n");
     sb.append("    assets: ").append(toIndentedString(assets)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -191,24 +236,16 @@ public class ProductBulkAddAssetsEntriesRequest {
     openapiRequiredFields = new HashSet<String>();
   }
 
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to ProductBulkAddAssetsEntriesRequest
-  */
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to ProductBulkAddAssetsEntriesRequest
+   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!ProductBulkAddAssetsEntriesRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in ProductBulkAddAssetsEntriesRequest is not found in the empty JSON string", ProductBulkAddAssetsEntriesRequest.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!ProductBulkAddAssetsEntriesRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ProductBulkAddAssetsEntriesRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -249,6 +286,28 @@ public class ProductBulkAddAssetsEntriesRequest {
            @Override
            public void write(JsonWriter out, ProductBulkAddAssetsEntriesRequest value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -256,29 +315,50 @@ public class ProductBulkAddAssetsEntriesRequest {
            public ProductBulkAddAssetsEntriesRequest read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             ProductBulkAddAssetsEntriesRequest instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();
     }
   }
 
- /**
-  * Create an instance of ProductBulkAddAssetsEntriesRequest given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of ProductBulkAddAssetsEntriesRequest
-  * @throws IOException if the JSON string is invalid with respect to ProductBulkAddAssetsEntriesRequest
-  */
+  /**
+   * Create an instance of ProductBulkAddAssetsEntriesRequest given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of ProductBulkAddAssetsEntriesRequest
+   * @throws IOException if the JSON string is invalid with respect to ProductBulkAddAssetsEntriesRequest
+   */
   public static ProductBulkAddAssetsEntriesRequest fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, ProductBulkAddAssetsEntriesRequest.class);
   }
 
- /**
-  * Convert an instance of ProductBulkAddAssetsEntriesRequest to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of ProductBulkAddAssetsEntriesRequest to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

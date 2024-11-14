@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **id**| **String** |   | [optional]
 **code**| **String** |   | [optional]
 **value**| [**ProductentitymanagerLocalizedText**](ProductentitymanagerLocalizedText.md) |   | [optional]
-**swatches**| [**List<EntitymanagerAttributeOptionSwatch>**](EntitymanagerAttributeOptionSwatch.md) |   | [optional]
+**swatches**| [**List<EntitymanagerAttributeOptionSwatch>**](EntitymanagerAttributeOptionSwatch.md) |   | [optional] [default to new ArrayList<>()]
 
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

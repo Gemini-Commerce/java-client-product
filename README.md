@@ -2,7 +2,8 @@
 
 Product Service
 - API version: v1
-  - Build date: 2024-08-06T13:40:57.069678376Z[Etc/UTC]
+  - Build date: 2024-11-14T11:24:03.179733008Z[Etc/UTC]
+  - Generator version: 7.9.0
 
 Introducing our revolutionary Product Management Service! Designed to streamline your product inventory and elevate customer experiences, our cutting-edge protobuf service is a game-changer in the world of efficient product management.
 
@@ -58,7 +59,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>org.openapitools</groupId>
   <artifactId>openapi-java-client</artifactId>
-  <version>2.0.1</version>
+  <version>v1</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -74,7 +75,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "org.openapitools:openapi-java-client:2.0.1"
+     implementation "org.openapitools:openapi-java-client:v1"
   }
 ```
 
@@ -88,7 +89,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-java-client-2.0.1.jar`
+* `target/openapi-java-client-v1.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -98,11 +99,11 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```java
 
 // Import classes:
-import GeminiCommerce_Product.ApiClient;
-import GeminiCommerce_Product.ApiException;
-import GeminiCommerce_Product.Configuration;
-import GeminiCommerce_Product.auth.*;
-import GeminiCommerce_Product.models.*;
+import GeminiCommerce.Product.ApiClient;
+import GeminiCommerce.Product.ApiException;
+import GeminiCommerce.Product.Configuration;
+import GeminiCommerce.Product.auth.*;
+import org.openapitools.client.model.*;
 import org.openapitools.client.api.ProductApi;
 
 public class Example {

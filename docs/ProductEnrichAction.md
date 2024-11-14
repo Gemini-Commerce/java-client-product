@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attributesToEnrich**| [**List<ProductAttributeToEnrich>**](ProductAttributeToEnrich.md) |   | [optional]
+**attributesToEnrich**| [**List<ProductAttributeToEnrich>**](ProductAttributeToEnrich.md) |   | [optional] [default to new ArrayList<>()]
 **generationLanguage**| [**ProductLanguageCode**](ProductLanguageCode.md) |  for more information please, see Model/ProductLanguageCode.php  | [optional] [default to ProductLanguageCode.UNKNOWN]
 
 
