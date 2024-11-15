@@ -52,7 +52,7 @@ import GeminiCommerce.Product.JSON;
 /**
  * EntitymanagerCreateAttributeOptionsResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-14T11:42:17.531571900Z[Etc/UTC]", comments = "Generator version: 7.9.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-15T15:20:21.892300556Z[Etc/UTC]", comments = "Generator version: 7.9.0")
 public class EntitymanagerCreateAttributeOptionsResponse {
   public static final String SERIALIZED_NAME_OPTIONS = "options";
   @SerializedName(SERIALIZED_NAME_OPTIONS)

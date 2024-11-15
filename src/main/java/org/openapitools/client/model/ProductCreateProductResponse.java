@@ -52,7 +52,7 @@ import GeminiCommerce.Product.JSON;
 /**
  * The CreateProductResponse message is used to provide a response after creating a product within the system. It includes fields that indicate the success of the product creation and any errors encountered during the process.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-14T11:42:17.531571900Z[Etc/UTC]", comments = "Generator version: 7.9.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-11-15T15:20:21.892300556Z[Etc/UTC]", comments = "Generator version: 7.9.0")
 public class ProductCreateProductResponse {
   public static final String SERIALIZED_NAME_SUCCESS = "success";
   @SerializedName(SERIALIZED_NAME_SUCCESS)
